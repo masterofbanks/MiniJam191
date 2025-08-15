@@ -462,10 +462,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc89e5f554a8154bb5b659bac7caad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 100
+  startingScale: 10
+  scale: 10
   offsetX: 13844.983
   offsetY: 94533.71
-  offsetBetweenDeposits: 50
+  minNumberOfDeposits: 5
+  currentNumberOfDeposits: 0
   GoldDeposit: {fileID: 5752131609428814115, guid: 0b4e105cf7ab8654a85d002f83ff3676, type: 3}
 --- !u!61 &1027643195
 BoxCollider2D:

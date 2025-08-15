@@ -9,26 +9,52 @@ public class TerrainGeneration : MonoBehaviour
 
     
 
-    public float scale = 20f;
+    public float startingScale;
+    public float scale;
     public float offsetX;
     public float offsetY;
 
     public int minNumberOfDeposits;
+    public int currentNumberOfDeposits; 
 
     public GameObject GoldDeposit;
-
     private BoxCollider2D terrainCollider;
-    public List<GameObject> deposits;
 
     private void Start()
     {
+        scale = startingScale;
         terrainCollider = GetComponent<BoxCollider2D>();
-        deposits = new List<GameObject>();
         GenerateOffsets();
     }
-    private void Update()
+
+    public void GenerateOffsets()
     {
-        //GenerateTerrain();
+        scale = startingScale;
+        DestroyDeposits();
+
+        while(currentNumberOfDeposits < minNumberOfDeposits)
+        {
+            DestroyDeposits();
+            offsetX = UnityEngine.Random.Range(0f, 99999f);
+            offsetY = UnityEngine.Random.Range(0f, 99999f);
+            GenerateTerrain();
+
+            scale += 10;
+
+        }
+
+
+
+    }
+
+    private void DestroyDeposits()
+    {
+        currentNumberOfDeposits = 0;
+        GameObject[] deposits = GameObject.FindGameObjectsWithTag("Deposit");
+        foreach (GameObject deposit in deposits)
+        {
+            Destroy(deposit);
+        }
     }
 
     /* 
@@ -60,7 +86,8 @@ public class TerrainGeneration : MonoBehaviour
                     Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(x, y, lowerLeftPixel.z));
                     if(OutDepositBounds(worldPos))
                     {
-                        deposits.Add(Instantiate(GoldDeposit, worldPos, Quaternion.identity));
+                        Instantiate(GoldDeposit, worldPos, Quaternion.identity);
+                        currentNumberOfDeposits++;
                     }
                 }   
             }
@@ -78,6 +105,7 @@ public class TerrainGeneration : MonoBehaviour
 
     bool OutDepositBounds(Vector3 pos)
     {
+        GameObject[] deposits = GameObject.FindGameObjectsWithTag("Deposit");
         foreach (GameObject deposit in deposits)
         {
             if (deposit.GetComponent<CircleCollider2D>().bounds.Contains(pos))
@@ -88,17 +116,5 @@ public class TerrainGeneration : MonoBehaviour
         return true;
     }
 
-    public void GenerateOffsets()
-    {
-
-        foreach (GameObject deposit in deposits)
-        {
-            Destroy(deposit);
-        }
-        deposits.Clear();
-        offsetX = UnityEngine.Random.Range(0f, 99999f);
-        offsetY = UnityEngine.Random.Range(0f, 99999f);
-        GenerateTerrain();
-        
-    }
+    
 }
