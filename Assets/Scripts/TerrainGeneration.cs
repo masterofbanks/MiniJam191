@@ -6,19 +6,19 @@ using static UnityEditor.PlayerSettings;
 
 public class TerrainGeneration : MonoBehaviour
 {
-
-    
-
+    [Header("Terrain Generation Settings")]
     public float startingScale;
-    public float scale;
     public float offsetX;
     public float offsetY;
-
     public int minNumberOfDeposits;
-    public int currentNumberOfDeposits; 
 
+    [Header("Deposits")]
     public GameObject GoldDeposit;
+
     private BoxCollider2D terrainCollider;
+    private float scale;
+    private int currentNumberOfDeposits;
+
 
     private void Start()
     {
