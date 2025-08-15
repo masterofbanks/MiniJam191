@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
@@ -13,21 +14,26 @@ public class TerrainGeneration : MonoBehaviour
     public int minNumberOfDeposits;
 
     [Header("Deposits")]
-    public GameObject GoldDeposit;
+    public GameObject goldDeposit;
+    public GameObject rareOreDeposit;
+
+    [Header("Deposit Frequencies")]
+    public float rareSpawnRateScaler;
 
     private BoxCollider2D terrainCollider;
     private float scale;
     private int currentNumberOfDeposits;
+    public int currentNumberOfRareDeposits;
 
 
     private void Start()
     {
         scale = startingScale;
         terrainCollider = GetComponent<BoxCollider2D>();
-        GenerateOffsets();
+        NewGeneration();
     }
 
-    public void GenerateOffsets()
+    public void NewGeneration()
     {
         scale = startingScale;
         DestroyDeposits();
@@ -43,13 +49,32 @@ public class TerrainGeneration : MonoBehaviour
 
         }
 
+        if (currentNumberOfRareDeposits == 0)
+        {
+            StartCoroutine(Testing());
+
+        }
 
 
+
+    }
+
+    IEnumerator Testing()
+    {
+        yield return new WaitForSeconds(0.01f);
+        GameObject[] deposits = GameObject.FindGameObjectsWithTag("Deposit");
+        GameObject randomDeposit = deposits[UnityEngine.Random.Range(0, deposits.Length)];
+
+        Vector3 randomPos = randomDeposit.transform.position;
+        Destroy(randomDeposit);
+        Instantiate(rareOreDeposit, randomPos, Quaternion.identity);
+        currentNumberOfRareDeposits++;
     }
 
     private void DestroyDeposits()
     {
         currentNumberOfDeposits = 0;
+        currentNumberOfRareDeposits = 0;
         GameObject[] deposits = GameObject.FindGameObjectsWithTag("Deposit");
         foreach (GameObject deposit in deposits)
         {
@@ -72,6 +97,7 @@ public class TerrainGeneration : MonoBehaviour
 
         Vector3 lowerLeftPixel = Camera.main.WorldToScreenPoint(lowerLeftWorld);
         Vector3 upperRightPixel = Camera.main.WorldToScreenPoint(upperRightWorld);
+        Debug.Log(lowerLeftPixel + " " + upperRightPixel);
 
         //Generate Perlin Noise Map For Texture
         for (int x = (int)lowerLeftPixel.x; x < (int)upperRightPixel.x; x++)
@@ -86,12 +112,17 @@ public class TerrainGeneration : MonoBehaviour
                     Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(x, y, lowerLeftPixel.z));
                     if(OutDepositBounds(worldPos))
                     {
-                        Instantiate(GoldDeposit, worldPos, Quaternion.identity);
+                        float normalizedYPos = (float)(y - (int)lowerLeftPixel.y) / (int)upperRightPixel.y;
+                        PutDeposit(worldPos, CalculateRareSpawnRate(normalizedYPos));
                         currentNumberOfDeposits++;
                     }
                 }   
             }
         }
+
+        
+
+        
 
     }
 
@@ -116,5 +147,28 @@ public class TerrainGeneration : MonoBehaviour
         return true;
     }
 
-    
+    void PutDeposit(Vector3 pos, float rareSpawnRate)
+    {
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+
+        if(randomValue < rareSpawnRate)
+        {
+            Instantiate(rareOreDeposit, pos, Quaternion.identity);
+            currentNumberOfRareDeposits++;
+        }
+
+        else
+        {
+            Instantiate(goldDeposit, pos, Quaternion.identity);
+        }
+
+
+    }
+
+    float CalculateRareSpawnRate(float yLevel)
+    {
+        return Mathf.Exp(-yLevel/ rareSpawnRateScaler);
+    }
+
+
 }

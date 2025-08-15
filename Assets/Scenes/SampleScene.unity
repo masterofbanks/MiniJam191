@@ -462,13 +462,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc89e5f554a8154bb5b659bac7caad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingScale: 10
-  scale: 10
+  startingScale: 30
   offsetX: 13844.983
   offsetY: 94533.71
-  minNumberOfDeposits: 5
-  currentNumberOfDeposits: 0
-  GoldDeposit: {fileID: 5752131609428814115, guid: 0b4e105cf7ab8654a85d002f83ff3676, type: 3}
+  minNumberOfDeposits: 13
+  goldDeposit: {fileID: 5752131609428814115, guid: 0b4e105cf7ab8654a85d002f83ff3676, type: 3}
+  rareOreDeposit: {fileID: 2136125027327993105, guid: 4de079316a5371849adc11e39cdc9a20, type: 3}
+  rareSpawnRateScaler: 0.2
+  currentNumberOfRareDeposits: 0
 --- !u!61 &1027643195
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -652,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 241.36003, y: 445}
+  m_AnchoredPosition: {x: 241.36003, y: 483}
   m_SizeDelta: {x: 231.28, y: 74.091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1819143456
@@ -701,7 +702,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1027643194}
         m_TargetAssemblyTypeName: TerrainGeneration, Assembly-CSharp
-        m_MethodName: GenerateOffsets
+        m_MethodName: NewGeneration
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
