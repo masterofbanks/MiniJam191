@@ -10,21 +10,27 @@ public class DrillMovement : MonoBehaviour
 
     public GameObject arrow;
     public float drillSpeed;
+    public bool inDeposit;
     private Rigidbody2D rb;
+    public GameObject targetDeposit;
+    public GameObject mineButton;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        inDeposit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && validAngle(aimAngle))
+        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit)
         {
             rb.velocity = aimDirection * drillSpeed;
         }
+
+        mineButton.SetActive(inDeposit);
 
     }
 
@@ -59,7 +65,7 @@ public class DrillMovement : MonoBehaviour
 
         //rotate the player towards the mouse via the aimAngle
 
-        if(validAngle(aimAngle))
+        if(ValidAngle(aimAngle))
         {
             transform.rotation = Quaternion.Euler(0, 0, aimAngle);
         }
@@ -68,8 +74,27 @@ public class DrillMovement : MonoBehaviour
         
     }
 
-    bool validAngle(float angle)
+    bool ValidAngle(float angle)
     {
         return angle > 185f && angle < 355f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Deposit"))
+        {
+            Debug.Log("Drill hit a deposit!");
+            inDeposit = true;
+            rb.velocity = Vector2.zero;
+            targetDeposit = collision.gameObject;
+        }
+
+    }
+
+    public void Mine()
+    {
+        if(targetDeposit != null)
+            Destroy(targetDeposit);
+            inDeposit = false;
     }
 }

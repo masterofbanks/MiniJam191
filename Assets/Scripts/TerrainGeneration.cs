@@ -97,7 +97,6 @@ public class TerrainGeneration : MonoBehaviour
 
         Vector3 lowerLeftPixel = Camera.main.WorldToScreenPoint(lowerLeftWorld);
         Vector3 upperRightPixel = Camera.main.WorldToScreenPoint(upperRightWorld);
-        Debug.Log(lowerLeftPixel + " " + upperRightPixel);
 
         //Generate Perlin Noise Map For Texture
         for (int x = (int)lowerLeftPixel.x; x < (int)upperRightPixel.x; x++)

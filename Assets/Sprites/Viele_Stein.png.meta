@@ -4494,7 +4494,7 @@ TextureImporter:
       name: Viele_Stein_208
       rect:
         serializedVersion: 2
-        x: 416
+        x: 448
         y: 8
         width: 32
         height: 32
@@ -4515,7 +4515,7 @@ TextureImporter:
       name: Viele_Stein_209
       rect:
         serializedVersion: 2
-        x: 448
+        x: 480
         y: 8
         width: 32
         height: 32
@@ -4528,6 +4528,27 @@ TextureImporter:
       bones: []
       spriteID: 37b1edfcc7e4eb340aa6f6bcf26f8e62
       internalID: -1726940052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Viele_Stein_210
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 8
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bed361349dfa11f4689d8fe6ade31629
+      internalID: -1967816574
       vertices: []
       indices: 
       edges: []
@@ -4668,6 +4689,7 @@ TextureImporter:
       Viele_Stein_208: -1968971890
       Viele_Stein_209: -1726940052
       Viele_Stein_21: -1366758668
+      Viele_Stein_210: -1967816574
       Viele_Stein_22: -641467858
       Viele_Stein_23: 1081403547
       Viele_Stein_24: -356042916
