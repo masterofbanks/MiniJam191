@@ -28,9 +28,9 @@ public class playerStats : MonoBehaviour
         if (tookDamage)
         {
             StopAllCoroutines();
-            
+            Debug.Log("stopped");
             StartCoroutine(startHealing());
-           
+            Debug.Log("started");
             tookDamage = false;
         }
 
@@ -59,16 +59,17 @@ public class playerStats : MonoBehaviour
     }
     IEnumerator startHealing()
     {
-      
+        Debug.Log("initial delay begin");
         yield return new WaitForSeconds(startHealDelay);
-       
+        Debug.Log("initial delay over");
         while (hp < totalHP)
         {
-            
+            Debug.Log("you are damaged healing now");
             yield return new WaitForSeconds(healDelay);
             hp++;
-       
+            Debug.Log("you have been healed one hp");
         }
     }
 
 }
+//when crystal ball triggered, set the players spell to be a instance of the spell class
