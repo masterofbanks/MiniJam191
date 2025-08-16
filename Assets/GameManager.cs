@@ -41,9 +41,13 @@ public class GameManager : MonoBehaviour
     {
         int numHearts = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP;
         int currentHealth = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp;
-        for(int i = numHearts - 1; i > currentHealth; i--)
+        if(currentHealth >= 0)
         {
-            healthContainer.transform.GetChild(i).GetComponent<Animator>().SetBool("empty", true);
+            for (int i = numHearts - 1; i >= currentHealth; i--)
+            {
+                healthContainer.transform.GetChild(i).GetComponent<Animator>().SetBool("empty", true);
+            }
         }
+        
     }
 }
