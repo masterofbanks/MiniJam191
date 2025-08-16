@@ -90,8 +90,15 @@ public class DrillMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
             targetDeposit = collision.gameObject;
         }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
+            transform.rotation = Quaternion.Euler(0, 0, 540 - aimAngle + 90);
+
+        }
 
     }
+
 
     public void Mine()
     {

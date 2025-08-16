@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Deposit
+  - Wall
   layers:
   - Default
   - TransparentFX
