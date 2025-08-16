@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class enemyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public Transform spawnTrans;
+    
     // Update is called once per frame
-    void Update()
+   
+    public  void spawnAtLocation(GameObject enemy)
     {
-        
+        Object.Instantiate(enemy, spawnTrans, true);
     }
 }
