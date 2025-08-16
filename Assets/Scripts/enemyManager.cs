@@ -13,7 +13,7 @@ public class enemyManager : MonoBehaviour
     {
        
             occupied = true;
-        
+        //sdsd
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
