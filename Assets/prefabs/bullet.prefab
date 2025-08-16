@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrans: {fileID: 0}
-  force: 5
+  force: 20
   bulletDamage: 1
   travelTime: 3
   accuracy: 0.95
