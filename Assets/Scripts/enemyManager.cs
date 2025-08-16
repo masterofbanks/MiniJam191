@@ -1,15 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class enemyManager : MonoBehaviour
 {
     public Transform spawnTrans;
-    
-    // Update is called once per frame
-   
-    public  void spawnAtLocation(GameObject enemy)
+    public bool occupied;
+    public GameObject enemy;
+    public void OnTriggerStay2D(Collider2D collision)
     {
-        Object.Instantiate(enemy, spawnTrans, true);
+       
+            occupied = true;
+        
+    }
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        occupied = false;
+    }
+
+    // Update is called once per frame
+
+    private void Start()
+    {
+        trySpawnAtLocation();
+        trySpawnAtLocation();
+    }
+    private void Update()
+    {
+       
+    }
+
+    public bool trySpawnAtLocation()
+    {
+        if(!occupied)
+        {
+            Object.Instantiate(enemy, spawnTrans);
+            return true;
+        }
+       
+        else
+        {
+            return false;
+        }
     }
 }
