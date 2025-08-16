@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camTrans: {fileID: 426770404}
   playerTrans: {fileID: 1450162132}
-  camPushMax: 0
+  camPushMax: 5
   camDist: 0
 --- !u!4 &723100961 stripped
 Transform:
@@ -803,10 +803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fe3e307c6ade640b520904f6187e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideByGrid: 0
-  m_UseMeshPrefab: {fileID: 0}
-  m_CompressBounds: 0
-  m_OverrideVector: {x: 1, y: 1, z: 1}
 --- !u!114 &1549093841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,25 +815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb11b6bcaf0c7b46a1cc89850a7e6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_MinRegionArea: 0
-  m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: e3a5ba7c2c7a1124194524ee71189320, type: 2}
 --- !u!1 &1617325802
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,10 +945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7c3aa077cc40c49a011167413230bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1703229666
 GameObject:
   m_ObjectHideFlags: 0
