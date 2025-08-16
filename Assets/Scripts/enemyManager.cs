@@ -8,6 +8,7 @@ public class enemyManager : MonoBehaviour
     public Transform spawnTrans;
     public bool occupied;
     public GameObject enemy;
+    public float spawnInterval = 0.5f;
     public void OnTriggerStay2D(Collider2D collision)
     {
        
@@ -23,8 +24,7 @@ public class enemyManager : MonoBehaviour
 
     private void Start()
     {
-        trySpawnAtLocation();
-        trySpawnAtLocation();
+        InvokeRepeating(nameof(trySpawnAtLocation), 0f, spawnInterval);
     }
     private void Update()
     {

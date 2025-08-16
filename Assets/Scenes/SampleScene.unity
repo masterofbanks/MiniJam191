@@ -608,6 +608,7 @@ GameObject:
   - component: {fileID: 1450162134}
   - component: {fileID: 1450162133}
   - component: {fileID: 1450162135}
+  - component: {fileID: 1450162136}
   m_Layer: 0
   m_Name: playerCharacter
   m_TagString: playerCharacter
@@ -704,7 +705,42 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.51670504
+--- !u!58 &1450162136
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450162131}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01113677, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.27726513
 --- !u!1 &1512936031
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +861,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -1103,10 +1139,6 @@ PrefabInstance:
     - target: {fileID: 8823358096272483369, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
       propertyPath: m_Name
       value: badguy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8823358096272483374, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8823358096272483375, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1458,6 +1490,7 @@ MonoBehaviour:
   spawnTrans: {fileID: 2015493543}
   occupied: 0
   enemy: {fileID: 8823358096272483369, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
+  spawnInterval: 0.5
 --- !u!1 &2020612749
 GameObject:
   m_ObjectHideFlags: 0
