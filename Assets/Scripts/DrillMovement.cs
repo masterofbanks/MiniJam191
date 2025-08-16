@@ -8,7 +8,7 @@ public class DrillMovement : MonoBehaviour
     public float aimAngle;
     public Vector2 aimDirection;
 
-    public GameObject arrow;
+    public GameObject arrowRotationPoint;
     public float drillSpeed;
     public bool inDeposit;
     private Rigidbody2D rb;
@@ -25,18 +25,20 @@ public class DrillMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetCrosshairPosition();
         if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit)
         {
             rb.velocity = aimDirection * drillSpeed;
+            transform.rotation = Quaternion.Euler(0, 0, aimAngle + 90f);
         }
-
+            
         mineButton.SetActive(inDeposit);
 
     }
 
     private void FixedUpdate()
     {
-        SetCrosshairPosition();
+        
     }
 
     private void SetCrosshairPosition()
@@ -67,7 +69,7 @@ public class DrillMovement : MonoBehaviour
 
         if(ValidAngle(aimAngle))
         {
-            transform.rotation = Quaternion.Euler(0, 0, aimAngle);
+            arrowRotationPoint.transform.rotation = Quaternion.Euler(0, 0, aimAngle);
         }
 
 
