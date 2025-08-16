@@ -6,42 +6,30 @@ using TMPro;
 public class enemyManager : MonoBehaviour
 {
     public Transform spawnTrans;
-    public bool occupied;
+    public float timeBetweenEnemySpawns;
     public GameObject enemy;
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-       
-            occupied = true;
-        
-    }
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        occupied = false;
-    }
 
+    public float t = 0f;
     // Update is called once per frame
 
     private void Start()
     {
-        trySpawnAtLocation();
-        trySpawnAtLocation();
+
     }
     private void Update()
     {
-       
+        t += Time.deltaTime;
+        if (t >= timeBetweenEnemySpawns)
+        {
+            t = 0f;
+            SpawnEnemy();
+        }
     }
 
-    public bool trySpawnAtLocation()
+    public void SpawnEnemy()
     {
-        if(!occupied)
-        {
-            Object.Instantiate(enemy, spawnTrans);
-            return true;
-        }
-       
-        else
-        {
-            return false;
-        }
+        GameObject newEnemy = Instantiate(enemy, spawnTrans.position, Quaternion.identity);
+
     }
+
 }
