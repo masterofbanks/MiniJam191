@@ -14,6 +14,7 @@ public class DrillMovement : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject targetDeposit;
     public GameObject mineButton;
+    public GameManager gameManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class DrillMovement : MonoBehaviour
     void Update()
     {
         SetCrosshairPosition();
-        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit)
+        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit && !gameManagerScript.inDrill)
         {
             rb.velocity = aimDirection * drillSpeed;
             transform.rotation = Quaternion.Euler(0, 0, aimAngle + 90f);
