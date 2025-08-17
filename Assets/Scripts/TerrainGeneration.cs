@@ -17,6 +17,7 @@ public class TerrainGeneration : MonoBehaviour
     public GameObject goldDeposit;
     public GameObject rareOreDeposit;
     public GameObject[] oreTypes;
+    public GameObject upgrade;
 
     [Header("Deposit Frequencies")]
     public float rareSpawnRateScaler;
@@ -25,7 +26,7 @@ public class TerrainGeneration : MonoBehaviour
     private float scale;
     private int currentNumberOfDeposits;
     public int currentNumberOfRareDeposits;
-
+    public int numupgrades;
 
     private void Start()
     {
@@ -54,15 +55,20 @@ public class TerrainGeneration : MonoBehaviour
 
         if (currentNumberOfRareDeposits == 0)
         {
-            StartCoroutine(Testing());
+            StartCoroutine(CorrectRareDeposit(rareOreDeposit));
 
+        }
+
+        if (numupgrades == 0)
+        {
+            StartCoroutine(CorrectRareDeposit(upgrade));
         }
 
 
 
     }
 
-    IEnumerator Testing()
+    IEnumerator CorrectRareDeposit(GameObject replacement)
     {
         yield return new WaitForSeconds(0.01f);
         GameObject[] deposits = GameObject.FindGameObjectsWithTag("Deposit");
@@ -70,9 +76,11 @@ public class TerrainGeneration : MonoBehaviour
 
         Vector3 randomPos = randomDeposit.transform.position;
         Destroy(randomDeposit);
-        Instantiate(rareOreDeposit, randomPos, Quaternion.identity);
+        Instantiate(replacement, randomPos, Quaternion.identity);
         currentNumberOfRareDeposits++;
     }
+
+    
 
     private void DestroyDeposits()
     {
@@ -159,9 +167,13 @@ public class TerrainGeneration : MonoBehaviour
             currentNumberOfRareDeposits++;
         }
 
-        else
+        else if(randomValue >= rareSpawnRate && randomValue < 0.9f)
         {
             Instantiate(goldDeposit, pos, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(upgrade, pos, Quaternion.identity);
         }
 
 

@@ -106,10 +106,16 @@ public class DrillMovement : MonoBehaviour
                 StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 1- rarity, rarity, 0));
                 
             }
-            else
+            else if(depositType < 4)
             {
                 StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 0.05f, 0.05f, depositType - 1));
 
+            }
+
+            else if(depositType == 4)
+            {
+                //Do Stuff with upgrading
+                Debug.Log("Upgrade Deposit Hit");
             }
 
             inDeposit = true;
