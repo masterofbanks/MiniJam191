@@ -34,7 +34,7 @@ public class DrillMovement : MonoBehaviour
     void Update()
     {
         SetCrosshairPosition();
-        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit && !gameManagerScript.inDrill)
+        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit && !gameManagerScript.inDrill && gameManagerScript.nearTerminal)
         {
             rb.velocity = aimDirection * drillSpeed;
             transform.rotation = Quaternion.Euler(0, 0, aimAngle + 90f);
@@ -103,13 +103,12 @@ public class DrillMovement : MonoBehaviour
 
             if (depositType == 0)
             {
-                StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 1- rarity, rarity));
+                StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 1- rarity, rarity, 0));
                 
             }
             else
             {
-                StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 0.05f, 0.05f));
-                
+                StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 0.05f, 0.05f, depositType - 1));
 
             }
 

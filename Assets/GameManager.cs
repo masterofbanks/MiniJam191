@@ -11,13 +11,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject mapCam;
     public GameObject drillCam;
-    public bool changeCam;
+    public bool nearTerminal;
     public GameObject spawnerParent;
     public GameObject healthContainer;
     public GameObject heartIcon;
     public GameObject gruntPrefab;
     public GameObject Goldling;
-    public GameObject Gemenie;
+    public GameObject[] Gemenies;
 
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI gemText;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private float localTimeBetweenWave = 0f;
     private float timeBetweenWaves;
 
-    public float decimalWaveAmount;
+    private float decimalWaveAmount;
     
     private float t = 0f;
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         spawnerParent = GameObject.FindWithTag("spawners");
         inDrill = true;
-        changeCam = false;
+        nearTerminal = false;
         waveAmount = startingWaveAmount;
         timeBetweenWaves = startTimeBetweenWaves;
         int numHearts = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP;
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.95f));
         }
 
-        if (Input.GetMouseButtonDown(1) && changeCam)
+        if (Input.GetMouseButtonDown(1))
         {
             inDrill = !inDrill;
             drillCam.SetActive(inDrill);
@@ -120,15 +120,14 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+       //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
 
 
-    public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial)
+    public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial, int gemType = 0)
     {
-        Debug.Log("01");
         float typeOf;
         int totalSpawnPoints = spawnerParent.transform.childCount;
         GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount = 0;
@@ -136,12 +135,10 @@ public class GameManager : MonoBehaviour
         GameObject enemy;
         for(int i = 0; i < amount; i++)
         {
-            Debug.Log("1");
            sucessfulspawn = false;
             yield return new WaitForSeconds(1f / ratePerSec);
             while (!sucessfulspawn)
             {
-                Debug.Log("2");
                 float roll = Random.Range(0f, 1f);
 
                 if (roll < typeRatioNormal)
@@ -170,7 +167,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case 1:
-                        enemy = Gemenie;
+                        enemy = Gemenies[gemType];
+                        Debug.Log("gemType: " + gemType);
+                        Debug.Log(Gemenies[gemType].name);
                         break;
                     default:
                         enemy = gruntPrefab;
@@ -186,7 +185,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    public IEnumerator spawnWave(int amount, float ratePerSec, int type)
+    public IEnumerator spawnWave(int amount, float ratePerSec, int type, int gemType = 1)
     {
 
         
@@ -212,7 +211,7 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case 1:
-                        enemy = Gemenie;
+                        enemy = Gemenies[gemType];
                         break;
                     default:
                         enemy = gruntPrefab;

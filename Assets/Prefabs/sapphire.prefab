@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7216265940580729887}
   - component: {fileID: 7694423653291029145}
   m_Layer: 0
-  m_Name: gemeniePrefab
+  m_Name: sapphire
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,12 +104,12 @@ MonoBehaviour:
   damageAmount: 2
   slapSpeed: 0.7
   enemyType: 1
-  gemAmount: 30
+  gemAmount: 60
   slapping: 0
   inRange: 0
   gameManagerScript: {fileID: 0}
   player: {fileID: 0}
-  enemyHealth: 5
+  enemyHealth: 8
 --- !u!195 &8763793274687486875
 NavMeshAgent:
   m_ObjectHideFlags: 0
