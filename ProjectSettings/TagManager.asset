@@ -20,6 +20,7 @@ TagManager:
   - door
   - navigationSurface
   - particleSpawner
+  - upgradePortal
   layers:
   - Default
   - TransparentFX

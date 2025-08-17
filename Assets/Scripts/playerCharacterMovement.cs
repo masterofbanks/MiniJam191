@@ -27,6 +27,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     public GameObject tooltip;
     private gunCrateType nearbyCrate;
     private doorProperties nearbyDoor;
+    private portalProperties nearbyPortal;
     private Rigidbody2D rb;
     private void Start()
     {
@@ -107,6 +108,19 @@ public class PlayerCharacterMovement : MonoBehaviour
             }
 
         }
+        if (nearbyPortal != null && Input.GetMouseButtonDown(1))
+        {
+            var stats = player.GetComponent<playerStats>();
+            if (stats.gems >= nearbyPortal.upgradecostGems && stats.gold >= nearbyPortal.upgradecostGold)
+            {
+
+                stats.gems -= nearbyPortal.upgradecostGems;
+                stats.gold -= nearbyPortal.upgradecostGold;
+                Destroy(nearbyDoor.gameObject);
+                navSurf.GetComponent<NavMeshSurface>().BuildNavMeshAsync();
+            }
+
+        }
         if (nearbyCrate != null)
         {
             tooltip.GetComponent<toolTip>().Show("Right Click to Interact \n" + nearbyCrate.gunString + " " + nearbyCrate.cost + " Gold");
@@ -118,6 +132,9 @@ public class PlayerCharacterMovement : MonoBehaviour
         }else if(gameManager.nearTerminal)
         {
             tooltip.GetComponent<toolTip>().Show("Right Click to Open Map");
+        }else if(nearbyPortal != null)
+        {
+            tooltip.GetComponent<toolTip>().Show("Right Click to upgrade \n" + nearbyPortal.upgradecostGems + " Gems\n" + nearbyPortal.upgradecostGold + "Gold");
         }
         else
         {
@@ -149,6 +166,11 @@ public class PlayerCharacterMovement : MonoBehaviour
             nearbyDoor = collision.gameObject.GetComponent<doorProperties>();
            
         }
+        if (collision.gameObject.CompareTag("upgradePortal"))
+        {
+            nearbyPortal = collision.gameObject.GetComponent<portalProperties>();
+        
+        }
     }
    
 
@@ -168,6 +190,7 @@ public class PlayerCharacterMovement : MonoBehaviour
             nearbyDoor = null;
 
         }
+       
     }
 }
 
