@@ -43,15 +43,19 @@ public class shooting : MonoBehaviour
         gunVelocity += bulletSpeed;
         gunBulletRange += Range;
         gunDamage += AD;
-        gunAccuracy = Mathf.Clamp(gunAccuracy + accu, 0, 1); // make sure between 0–1
+        gunAccuracy = Mathf.Clamp(gunAccuracy + accu, 0, 1); // make sure between 0ï¿½1
         piercing = pierce || piercing; // keep piercing true if ever set
         maxDamage += maxdamage;
     }
     // Update is called once per frame
     void Update()
     {
-        
-        SetCrosshairPosition();
+        bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy, piercing, maxDamage);
+        if (GameObject.FindWithTag("GameController").GetComponent<GameManager>().inDrill)
+        {
+            SetCrosshairPosition();
+
+        }
 
         if (!canFire )
         {
@@ -62,18 +66,21 @@ public class shooting : MonoBehaviour
                 timer = 0;
             }
         }
-        
-        if (Input.GetMouseButton(0) && canFire &&!Semi)
+        if (GameObject.FindWithTag("GameController").GetComponent<GameManager>().inDrill)
         {
-            canFire = false;
-            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
+            if (Input.GetMouseButton(0) && canFire && !Semi)
+            {
+                canFire = false;
+                StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
 
+            }
+            else if (Input.GetMouseButtonDown(0) && canFire)
+            {
+                canFire = false;
+                StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
+            }
         }
-        else if(Input.GetMouseButtonDown(0) && canFire)
-        {
-            canFire = false;
-            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
-        }
+        
 
       
     }
