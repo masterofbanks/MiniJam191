@@ -61,18 +61,21 @@ public class shooting : MonoBehaviour
                 timer = 0;
             }
         }
-        
-        if (Input.GetMouseButton(0) && canFire &&!Semi)
+        if (GameObject.FindWithTag("GameController").GetComponent<GameManager>().inDrill)
         {
-            canFire = false;
-            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
+            if (Input.GetMouseButton(0) && canFire && !Semi)
+            {
+                canFire = false;
+                StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
 
+            }
+            else if (Input.GetMouseButtonDown(0) && canFire)
+            {
+                canFire = false;
+                StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
+            }
         }
-        else if(Input.GetMouseButtonDown(0) && canFire)
-        {
-            canFire = false;
-            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
-        }
+        
 
       
     }
