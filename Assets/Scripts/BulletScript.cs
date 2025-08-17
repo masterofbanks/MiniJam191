@@ -109,5 +109,12 @@ public class BulletScript : MonoBehaviour
             
             Enemyscript.bulletHit(other.gameObject, bulletDamage);
         }
+
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
+
+    
 }

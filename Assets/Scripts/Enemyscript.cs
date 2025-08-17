@@ -54,15 +54,11 @@ public class Enemyscript : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log("1");
         // Print the object name
-        Debug.Log("Collided with: " + collision.gameObject.name);
 
         // Print the full path in hierarchy (sometimes useful for children)
-        Debug.Log("Collided root: " + collision.transform.root.name);
         if (collision.gameObject.CompareTag("playerCharacter"))
         {
-            Debug.Log("2");
             crack = collision.gameObject;
 
             inRange = true;
