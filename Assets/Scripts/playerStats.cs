@@ -8,6 +8,7 @@ public class playerStats : MonoBehaviour
     public int hp = 6;
     public int totalHP = 6;
     public int speed;
+    public int activeGun;
     public float startHealDelay;
     public float healDelay;
     public GameManager gameManagerScript;
@@ -34,11 +35,58 @@ public class playerStats : MonoBehaviour
             StartCoroutine(startHealing());
             tookDamage = false;
         }
-
+        
       
 
 
     }
+    public void changeGun(int activeGun)
+    {
+        switch (activeGun)
+        {
+            case 0:
+                //default pistol
+                break;
+            case 1:
+                //stronger pistol
+                break;
+            case 2:
+                //burst rifle
+                break;
+            case 3:
+                //semi auto rifle
+                break;
+            case 4:
+                //shotgun
+                break;
+            case 5:
+                //auto rifle
+                break;
+            case 6:
+                //smg
+                break;
+            case 7:
+                //sniper
+                break;
+            case 8:
+                //laser
+                break;
+            case 9:
+                //mini gun
+                break;
+            case 10:
+                //rocket launcher special rare (need to add explosion mechanic)
+                break;
+            default:
+                //default pistol
+                break;
+
+
+
+
+        }
+    }
+
     public static void ApplyDamage(GameObject Target, int damage = 0, int hpc = 0)
     {
         

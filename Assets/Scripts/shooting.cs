@@ -14,15 +14,21 @@ public class shooting : MonoBehaviour
     public bool canFire;
     private float timer;
     
+    
+    [Header("gun stats")]
+    public bool Semi;
     public float timeBetweenFiring; //firerate
-    // Start is called before the first frame update
+    public float gunDamage;
+    public float gunAccuracy;
+    public float gunBulletRange;
+    public float gunVelocity;
 
-
-
-    public void updateBulletStats(float fireRate)
+    /*public void updategunStats(float fireRate,float bulletSpeed, float Range, float AD, float accu, bool isSemi)
     {
         timeBetweenFiring = fireRate;
-    }
+        bullet.GetComponent<BulletScript>().updateBulletStats(bulletSpeed, Range, AD, accu);
+        Semi = isSemi;
+    }*/
 
 
     void Start()
@@ -86,11 +92,15 @@ public class shooting : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0) && canFire)
+        if (Input.GetMouseButton(0) && canFire &&!Semi)
         {
             canFire = false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
 
+        }else if(Input.GetMouseButtonDown(0) && canFire)
+        {
+            canFire = false;
+            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
 
       
