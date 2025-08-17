@@ -13,9 +13,10 @@ public class shooting : MonoBehaviour
     public Transform bulletTransform;
     public bool canFire;
     private float timer;
-    
-    
+
+
     [Header("gun stats")]
+    public bool piercing;
     public bool Semi;
     public int burstAmount;
     public float burstspeed;
@@ -24,7 +25,7 @@ public class shooting : MonoBehaviour
     public float gunAccuracy;
     public float gunBulletRange;
     public float gunVelocity;
-
+    public float maxDamage;
     /*public void updategunStats(float fireRate,float bulletSpeed, float Range, float AD, float accu, bool isSemi)
     {
         timeBetweenFiring = fireRate;
@@ -42,7 +43,7 @@ public class shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy);
+        bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy, piercing, maxDamage);
         mousepos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         if(Vector3.Distance(mousepos, gunTrans.position)<=10.12f)
         {
@@ -109,6 +110,7 @@ public class shooting : MonoBehaviour
 
       
     }
+   
     public IEnumerator fireGun(GameObject bullet, Quaternion rot, float burstSpeed, int burstAmount)
     {
         

@@ -97,9 +97,11 @@ public class Enemyscript : MonoBehaviour
                     player.GetComponent<playerStats>().gems += gemAmount;
                     break;
 
-
+                   
             }
             player.GetComponent<playerStats>().enemyKillCount++;
+           
+            player.GetComponent<playerStats>().gold += 60;
             Destroy(gameObject);
             
         }

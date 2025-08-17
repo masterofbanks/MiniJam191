@@ -6,4 +6,5 @@ public class gunCrateType : MonoBehaviour
 {
     public int gunType;
     public int cost;
+    public string gunString;
 }

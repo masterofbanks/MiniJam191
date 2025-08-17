@@ -167,11 +167,13 @@ MonoBehaviour:
   bullet: {fileID: 1912396345024927245, guid: b6857cdf23ce124498dd85b4ae6b8c6c, type: 3}
   bulletTransform: {fileID: 411283661418973598}
   canFire: 1
-  Semi: 0
+  piercing: 1
+  Semi: 1
   burstAmount: 1
   burstspeed: 0
   timeBetweenFiring: 2
-  gunDamage: 15
+  gunDamage: 10
   gunAccuracy: 0.96
   gunBulletRange: 20
   gunVelocity: 20
+  maxDamage: 50
