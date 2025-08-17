@@ -20,6 +20,7 @@ public class depositParticleSpawner : MonoBehaviour
 
     void Start()
     {
+        //sdfsdfsdf
         maincam = Camera.main;
         startParticleEffect();
     }
