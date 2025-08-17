@@ -8,28 +8,44 @@ public class enemyManager : MonoBehaviour
     public Transform spawnTrans;
     public float timeBetweenEnemySpawns;
     public GameObject enemy;
-
-    public float t = 0f;
+    public bool occupied;
+    
     // Update is called once per frame
+    public void OnTriggerStay2D(Collider2D collision)
+    {
 
+        occupied = true;
+
+    }
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        occupied = false;
+    }
     private void Start()
     {
 
     }
     private void Update()
     {
-        t += Time.deltaTime;
-        if (t >= timeBetweenEnemySpawns)
-        {
-            t = 0f;
-            SpawnEnemy();
-        }
+       
     }
 
-    public void SpawnEnemy()
+    public bool trySpawnEnemy(GameObject enemy)
     {
-        GameObject newEnemy = Instantiate(enemy, spawnTrans.position, Quaternion.identity);
+       
+        if (!occupied)
+        {
 
+            Object.Instantiate(enemy, spawnTrans);
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+        
+        
     }
 
 }
