@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        spawnWave(15, 0.55f, 0.95f, 0.05f);
-
+        StartCoroutine(spawnWave(15, 0.55f, 0.95f, 0.05f));
+        Debug.Log("0");
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial)
     {
-       
+        Debug.Log("01");
         float typeOf;
         int totalSpawnPoints = spawnerParent.transform.childCount;
         bool sucessfulspawn;
