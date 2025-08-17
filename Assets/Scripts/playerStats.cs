@@ -15,14 +15,15 @@ public class playerStats : MonoBehaviour
 
    
     
-   public int gold = 0;
+    public int gold = 0;
 
- public int gems = 0;
+    public int gems = 0;
 
 
     private void Start()
     {
         hp = totalHP;
+        gameManagerScript = GameObject.Find("GameController").GetComponent<GameManager>();
     }
 
     private void Update()
