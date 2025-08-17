@@ -24,6 +24,7 @@ public class DrillMovement : MonoBehaviour
     public shooting bullet;
     public depositParticleSpawner particleSpawner;
     public GameObject newAreaText;
+    public GameObject hitSomethingText;
     public float blinkDuration = 0.5f;
     // Start is called before the first frame update
     void Start()
@@ -111,11 +112,13 @@ public class DrillMovement : MonoBehaviour
             {
                 StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 1- rarity, rarity, 0));
                 particleSpawner.spawnOre(depositType+4);
+                hitSomethingText.GetComponent<TextMeshProUGUI>().text = "Hit a deposit!";
             }
             else if(depositType < 4)
             {
                 StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 0.05f, 0.05f, depositType - 1));
                 particleSpawner.spawnOre(depositType);
+                hitSomethingText.GetComponent<TextMeshProUGUI>().text = "Hit a deposit!";
             }
 
             else if(depositType == 4)
@@ -180,10 +183,13 @@ public class DrillMovement : MonoBehaviour
                         break;
                     }
                 }
+
+                hitSomethingText.GetComponent<TextMeshProUGUI>().text = "Upgrade Hit!";
             }
 
             inDeposit = true;
             targetDeposit = collision.gameObject;
+            StartCoroutine(blinkText(hitSomethingText));
             Mine();
         }
         else if (collision.gameObject.CompareTag("Wall"))
