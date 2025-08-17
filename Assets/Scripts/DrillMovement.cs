@@ -17,7 +17,8 @@ public class DrillMovement : MonoBehaviour
     public GameManager gameManagerScript;
     public TerrainGeneration terrainGenScript;
     public bool firstDirectionSet;
-
+    public int depositWaveAmount;
+    public float rarity;
     private Vector3 startPos;
 
     // Start is called before the first frame update
@@ -40,7 +41,7 @@ public class DrillMovement : MonoBehaviour
             if (!firstDirectionSet)
             {
                 firstDirectionSet = true;
-                StartCoroutine(gameManagerScript.spawnWave(15, 1f, 0.95f, 0.95f));
+                StartCoroutine(gameManagerScript.spawnWave(gameManagerScript.waveAmount, 1f, 0.95f, 0.95f));
             }
         }
             
@@ -102,12 +103,12 @@ public class DrillMovement : MonoBehaviour
 
             if (depositType == 0)
             {
-                StartCoroutine(gameManagerScript.spawnWave(15, 0.55f, 0.05f, 0.95f));
+                StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 1- rarity, rarity));
                 
             }
             else
             {
-                StartCoroutine(gameManagerScript.spawnWave(15, 0.55f, 0.05f, 0.05f));
+                StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 0.05f, 0.05f));
                 
 
             }
@@ -134,6 +135,10 @@ public class DrillMovement : MonoBehaviour
 
     public void ResetPosition()
     {
+        int randAmount = UnityEngine.Random.Range(depositWaveAmount - (int)Mathf.Floor(depositWaveAmount / 2), depositWaveAmount + (int)Mathf.Floor(depositWaveAmount / 2));
+        depositWaveAmount = randAmount;
+        float randRarity = UnityEngine.Random.Range(0.8f, 0.999f);
+        rarity = randRarity;
         transform.position = startPos;
         terrainGenScript.NewGeneration();
     }

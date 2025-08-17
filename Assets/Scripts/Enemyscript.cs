@@ -87,22 +87,18 @@ public class Enemyscript : MonoBehaviour
             {
                 case -1:
                     player.GetComponent<playerStats>().gold += 20;
-                    Destroy(gameObject);
                     break;
 
                 case 0:
                     player.GetComponent<playerStats>().gold += 60;
-                    Destroy(gameObject);
                     break;
                 case 1:
                     player.GetComponent<playerStats>().gems += 30;
-                    Destroy(gameObject);
                     break;
 
 
             }
-
-            player.GetComponent<playerStats>().gold += 60;
+            player.GetComponent<playerStats>().enemyKillCount++;
             Destroy(gameObject);
             
         }

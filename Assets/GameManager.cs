@@ -21,9 +21,25 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI gemText;
+    public DrillMovement drillMovementScript;
 
-    public int waveAmount;
+    [Header("Wave Settings")]
+    public int startingWaveAmount;
+    public int finishingWaveAmount;
+    public int waveAmount = 0;
     public float rateOfSpawn = 0.55f; //how many enemies per second
+    public float startTimeBetweenWaves;
+    public float endTimeBetweenWaves;
+
+    public float waveTimeScaler; //make this bigger to make timeBetweenWaves decrease slower
+    public float waveAmountScaler; //make this bigger to make waveAmount increase slower
+
+    private float localTimeBetweenWave = 0f;
+    private float timeBetweenWaves;
+
+    public float decimalWaveAmount;
+    
+    private float t = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +47,8 @@ public class GameManager : MonoBehaviour
         spawnerParent = GameObject.FindWithTag("spawners");
         inDrill = true;
         changeCam = false;
+        waveAmount = startingWaveAmount;
+        timeBetweenWaves = startTimeBetweenWaves;
         int numHearts = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP;
         for(int i = 0; i < numHearts; i++)
         {
@@ -43,7 +61,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(1) && changeCam)
+        if (drillMovementScript.firstDirectionSet)
+        {
+            t += Time.deltaTime;
+            UpdateTimeBetweenWaves(t);
+            UpdateWaveAmount(t);
+            localTimeBetweenWave += Time.deltaTime;
+        }
+        int currentKillCount = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount;
+        if (localTimeBetweenWave >= timeBetweenWaves && currentKillCount >= waveAmount)
+        {
+            localTimeBetweenWave = 0f;
+            StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.95f));
+        }
+
+        if (Input.GetMouseButtonDown(1) && changeCam)
         {
             inDrill = !inDrill;
             drillCam.SetActive(inDrill);
@@ -53,6 +85,23 @@ public class GameManager : MonoBehaviour
 
         UpdateHealth();
 
+    }
+
+    public void UpdateTimeBetweenWaves(float t)
+    {
+        // c exp(-t/a) + b
+        // c + b = startTimeBetweenWaves;
+        // b is the endTimeBetweenWaves;
+        float c = startTimeBetweenWaves - endTimeBetweenWaves;
+        timeBetweenWaves = c * Mathf.Exp(-t / waveTimeScaler) + endTimeBetweenWaves;
+    }
+
+    public void UpdateWaveAmount(float t)
+    {
+        // f(1 - exp(-x/waveAmountScaler) + startingWaveAmount
+
+        decimalWaveAmount = (finishingWaveAmount - startingWaveAmount) * (1 - Mathf.Exp(-t / waveAmountScaler)) + startingWaveAmount;
+        waveAmount = Mathf.FloorToInt(decimalWaveAmount);
     }
 
     public void UpdateHealth()
@@ -82,6 +131,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("01");
         float typeOf;
         int totalSpawnPoints = spawnerParent.transform.childCount;
+        GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount = 0;
         bool sucessfulspawn;
         GameObject enemy;
         for(int i = 0; i < amount; i++)

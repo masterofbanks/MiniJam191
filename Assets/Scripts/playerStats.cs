@@ -21,7 +21,7 @@ public class playerStats : MonoBehaviour
 
     public int gems = 0;
 
-
+    public int enemyKillCount = 0;
     private void Start()
     {
         player = GameObject.FindWithTag("playerCharacter");
