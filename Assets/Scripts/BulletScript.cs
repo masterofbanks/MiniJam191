@@ -8,6 +8,7 @@ public class BulletScript : MonoBehaviour
     private Camera mainCam;
     Rigidbody2D rb;
     public Transform playerTrans;
+    public Vector2 direction; //direction of the bullet
 
     public float force; //bullet speed
     public float bulletDamage;
@@ -42,15 +43,7 @@ public class BulletScript : MonoBehaviour
         float maxSpread = 80f;
         float spreadAngle = Random.Range(-maxSpread + (maxSpread * accuracy), maxSpread - (maxSpread * accuracy)); ; 
 
-        Vector3 direction;
-        if (Vector3.Distance(mousePos, transform.position) <= 10.05f)
-        {
-            direction = mousePos - playerTrans.position;
-        }
-        else
-        {
-            direction = mousePos - transform.position;
-        }
+        
 
         // Rotate the direction vector by the spread angle
         float angleRad = spreadAngle * Mathf.Deg2Rad;

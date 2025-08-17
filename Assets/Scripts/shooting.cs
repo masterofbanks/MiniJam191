@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class shooting : MonoBehaviour
 {
     private Camera mainCam;
-    Vector3 mousepos;
-    public Transform playerTrans;
-    public Transform gunTrans;
-    public Transform gunEndTrans;
+
+    public float aimAngle;
+    public Vector2 aimDirection;
     public GameObject bullet;
-    public Transform bulletTransform;
+    public Transform bulletTransform; //where the bullet spawns
     public bool canFire;
     private float timer;
 
@@ -36,55 +36,14 @@ public class shooting : MonoBehaviour
 
     void Start()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        playerTrans = GameObject.FindWithTag("playerCharacterMesh").transform;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy, piercing, maxDamage);
-        mousepos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        if(Vector3.Distance(mousepos, gunTrans.position)<=10.12f)
-        {
-            Vector3 rotation = mousepos - playerTrans.position;
-            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, rotZ - 90);
-            Vector2 scale = transform.localScale;
-            //flips player
-
-            if (playerTrans.position.x - gunEndTrans.position.x > 0)
-            {
-
-                rotation.z = rotation.z * -1;
-            }
-            else if (playerTrans.position.x - gunEndTrans.position.x < 0)
-            {
-
-                rotation.z = rotation.z * -1;
-            }
-            transform.localScale = scale;
-        }
-        else
-        {
-            Vector3 rotation = mousepos - gunEndTrans.position;
-            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, rotZ - 90);
-            Vector2 scale = transform.localScale;
-            //flips player
-
-            if (playerTrans.position.x - gunEndTrans.position.x > 0)
-            {
-
-                rotation.z = rotation.z * -1;
-            }
-            else if (playerTrans.position.x - gunEndTrans.position.x < 0)
-            {
-
-                rotation.z = rotation.z * -1;
-            }
-            transform.localScale = scale;
-        }
+        SetCrosshairPosition();
 
         if (!canFire )
         {
@@ -113,14 +72,46 @@ public class shooting : MonoBehaviour
    
     public IEnumerator fireGun(GameObject bullet, Quaternion rot, float burstSpeed, int burstAmount)
     {
-        
-        for(int i = 0; i< burstAmount; i++)
+
+        for (int i = 0; i < burstAmount; i++)
         {
-            
+
             Vector3 bulletTrans = bulletTransform.position;
-            Instantiate(bullet, bulletTrans, rot);
+            GameObject bulletObj = Instantiate(bullet, bulletTrans, rot);
+            bulletObj.GetComponent<BulletScript>().direction = aimDirection;
             yield return new WaitForSeconds(burstSpeed);
         }
+
+        yield return new WaitForSeconds(0.1f);
      
+    }
+
+    private void SetCrosshairPosition()
+    {
+
+        //get position of the mouse in world coords
+        var worldMousePosition =
+            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+        //vector between player and mouse
+        var facingDirection = worldMousePosition - transform.position;
+        //get angle between facingDirection and horizontal axis
+        aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
+        //make sure its between 0 and 2pi
+        if (aimAngle < 0f)
+        {
+            aimAngle = Mathf.PI * 2 + aimAngle;
+        }
+
+
+        aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
+        aimDirection.Normalize();
+        //convert to degrees
+
+
+        aimAngle = aimAngle * 180 / Mathf.PI;
+
+        //rotate the player towards the mouse via the aimAngle
+
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
 }

@@ -157,6 +157,7 @@ public class PlayerCharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("terminal"))
         {
             gameManager.nearTerminal = false;
+            gameManager.GoBackToMainCam();
         }
         if (collision.gameObject.CompareTag("gunCrate"))
         {

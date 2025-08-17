@@ -77,14 +77,26 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && nearTerminal)
         {
-            inDrill = !inDrill;
-            drillCam.SetActive(inDrill);
-            mapCam.SetActive(!inDrill);
+            FlipCams();
         }
       
 
         UpdateHealth();
 
+    }
+
+    public void FlipCams()
+    {
+        inDrill = !inDrill;
+        drillCam.SetActive(inDrill);
+        mapCam.SetActive(!inDrill);
+    }
+
+    public void GoBackToMainCam()
+    {
+        inDrill = true;
+        drillCam.SetActive(true);
+        mapCam.SetActive(false);
     }
 
     public void UpdateTimeBetweenWaves(float t)
