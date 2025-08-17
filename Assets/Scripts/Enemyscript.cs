@@ -9,15 +9,17 @@ public class Enemyscript : MonoBehaviour
     NavMeshAgent agent;
 
 
-    [SerializeField] Transform targetTransform;
+    
 
     public int damageAmount = 1;
-    public int slapSpeed;
-   
-    public bool slapping =true;
-    public bool inRange = true;
+    public float slapSpeed;
+    public int enemyType;
+    public bool slapping =false;
+    public bool inRange = false;
     GameObject crack;
-
+    public GameManager gameManagerScript;
+    public GameObject player;
+    
     public float enemyHealth;
     //gameObject.GetComponent<NavMeshAgent>().isStopped = true/false;
     void Awake()
@@ -29,11 +31,20 @@ public class Enemyscript : MonoBehaviour
     
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("playerCharacter");
+        if (player == null)
+        {
+            Debug.Log("Player not found! Check the tag is correct.");
+            
+        }else
+        {
+            Debug.Log("Player found!");
+        }
+        agent = gameObject.GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        GameObject targetAcquired = GameObject.Find("playerCharacter");
-        targetTransform = targetAcquired.transform;
+        
+        
 
         
         
@@ -57,7 +68,7 @@ public class Enemyscript : MonoBehaviour
     }
     void Update()
     {
-        Vector3 targetPosition = targetTransform.position;
+        Vector3 targetPosition = player.transform.position;
         
        
 
@@ -72,8 +83,9 @@ public class Enemyscript : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            player.GetComponent<playerStats>().gold += 60;
             Destroy(gameObject);
-            playerStats.points +=60;
+            
         }
     }
 
@@ -94,7 +106,7 @@ public class Enemyscript : MonoBehaviour
     IEnumerator slapDelay(GameObject other)
     {
         yield return new WaitForSeconds(slapSpeed);
-        if (slapping && inRange)
+        if (inRange)
         {
             sendDamage(other, damageAmount);
             slapping = false;
@@ -110,8 +122,29 @@ public class Enemyscript : MonoBehaviour
     }
     private void enemyTakeDamage(float damag)
     {
-        enemyHealth -= damag;
-        playerStats.points +=10;
-        Debug.Log(playerStats.points);
+        if (gameManagerScript == null)
+            gameManagerScript = GameObject.FindObjectOfType<GameManager>();
+        switch (enemyType)
+        {
+            case -1:
+                enemyHealth -= damag;
+                float roll = Random.Range(0f, 1f);
+                if (roll < Mathf.Pow(0.95f, gameManagerScript.planet))
+                    player.GetComponent<playerStats>().gold += 10;
+                else
+                    player.GetComponent<playerStats>().gems += 10;
+
+
+                break;
+            case 0:
+                enemyHealth -= damag;
+                player.GetComponent<playerStats>().gold += 30;
+                break;
+            case 1:
+                enemyHealth -= damag;
+                player.GetComponent<playerStats>().gems += (int)Mathf.Pow(30, enemyType);
+                break;
+
+        }
     }
 }

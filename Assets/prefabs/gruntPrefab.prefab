@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 331874257699250149}
   - component: {fileID: 7768442777094860109}
   - component: {fileID: 2745159475999137134}
-  - component: {fileID: 2956961596714825422}
   - component: {fileID: 3661303763108985285}
   - component: {fileID: 2803363206191273775}
   m_Layer: 0
@@ -101,11 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2954c7b924e6a144994577f0eedc7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
   damageAmount: 1
-  slapSpeed: 2
+  slapSpeed: 0.5
+  enemyType: -1
   slapping: 0
-  inRange: 1
+  inRange: 0
+  gameManagerScript: {fileID: 0}
+  player: {fileID: 0}
   enemyHealth: 5
 --- !u!195 &2745159475999137134
 NavMeshAgent:
@@ -129,41 +130,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!58 &2956961596714825422
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8433337167885883200}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.01571849, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5390128
 --- !u!50 &3661303763108985285
 Rigidbody2D:
   serializedVersion: 4
@@ -223,6 +189,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000106436865, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8395206
+  m_Radius: 0.93

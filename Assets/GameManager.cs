@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool inDrill; //false if looking at the map
+    public int planet;
 
     public GameObject mapCam;
     public GameObject drillCam;
