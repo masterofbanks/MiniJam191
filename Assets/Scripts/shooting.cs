@@ -14,26 +14,35 @@ public class shooting : MonoBehaviour
     public bool canFire;
     private float timer;
     
+    
+    [Header("gun stats")]
+    public bool Semi;
+    public int burstAmount;
+    public float burstspeed;
     public float timeBetweenFiring; //firerate
-    // Start is called before the first frame update
+    public float gunDamage;
+    public float gunAccuracy;
+    public float gunBulletRange;
+    public float gunVelocity;
 
-
-
-    public void updateBulletStats(float fireRate)
+    /*public void updategunStats(float fireRate,float bulletSpeed, float Range, float AD, float accu, bool isSemi)
     {
         timeBetweenFiring = fireRate;
-    }
+        bullet.GetComponent<BulletScript>().updateBulletStats(bulletSpeed, Range, AD, accu);
+        Semi = isSemi;
+    }*/
 
 
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        playerTrans = GameObject.FindWithTag("playerCharacterMesh").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy);
         mousepos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         if(Vector3.Distance(mousepos, gunTrans.position)<=10.12f)
         {
@@ -76,7 +85,7 @@ public class shooting : MonoBehaviour
             transform.localScale = scale;
         }
 
-        if (!canFire)
+        if (!canFire )
         {
             timer += Time.deltaTime;
             if(timer > timeBetweenFiring)
@@ -85,14 +94,31 @@ public class shooting : MonoBehaviour
                 timer = 0;
             }
         }
-
-        if (Input.GetMouseButton(0) && canFire)
+        
+        if (Input.GetMouseButton(0) && canFire &&!Semi)
         {
             canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
 
+        }
+        else if(Input.GetMouseButtonDown(0) && canFire)
+        {
+            canFire = false;
+            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
         }
 
       
+    }
+    public IEnumerator fireGun(GameObject bullet, Quaternion rot, float burstSpeed, int burstAmount)
+    {
+        
+        for(int i = 0; i< burstAmount; i++)
+        {
+            
+            Vector3 bulletTrans = bulletTransform.position;
+            Instantiate(bullet, bulletTrans, rot);
+            yield return new WaitForSeconds(burstSpeed);
+        }
+     
     }
 }

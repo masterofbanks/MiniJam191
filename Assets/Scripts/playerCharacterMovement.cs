@@ -21,14 +21,15 @@ public class PlayerCharacterMovement : MonoBehaviour
     public float staminaExaust = 0.003f;
 
     public GameManager gameManager;
-
-
+    public GameObject player;
+    private gunCrateType nearbyCrate;
     private Rigidbody2D rb;
     private void Start()
     {
         stamina = maxStamina;
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameController").GetComponent<GameManager>();
+        player = GameObject.FindWithTag("playerCharacter");
     }
 
     private void FixedUpdate()
@@ -71,16 +72,29 @@ public class PlayerCharacterMovement : MonoBehaviour
     void Update()
     {
         //recieves wasd as input assiging a value from -1 to 1
-        
+
 
 
         ////uses change in time, a preset speed variable, and input to move character
         //transform.Translate(Time.deltaTime * Vector2.up * speed * verti);
         //transform.Translate(Time.deltaTime * Vector2.right * speed * hori);
 
-        
+        if (nearbyCrate != null && Input.GetMouseButtonDown(1)) // right click
+        {
+            var stats = player.GetComponent<playerStats>();
+            if (stats.gold >= nearbyCrate.cost)
+            {
+                Debug.Log("Bought gun type " + nearbyCrate.gunType);
+                stats.gold -= nearbyCrate.cost;
+                stats.changeGun(nearbyCrate.gunType);
+            }
+            else
+            {
+                Debug.Log("Not enough gold!");
+            }
+        }
 
-        
+
 
     }
 
@@ -95,13 +109,25 @@ public class PlayerCharacterMovement : MonoBehaviour
         {
             gameManager.changeCam = true;
         }
+
+        if (collision.gameObject.CompareTag("gunCrate"))
+        {
+            nearbyCrate = collision.gameObject.GetComponent<gunCrateType>();
+            Debug.Log("Entered crate zone");
+        }
     }
+   
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("terminal"))
         {
             gameManager.changeCam = false;
+        }
+        if (collision.gameObject.CompareTag("gunCrate"))
+        {
+            nearbyCrate = null;
+            
         }
     }
 }

@@ -8,12 +8,14 @@ public class playerStats : MonoBehaviour
     public int hp = 6;
     public int totalHP = 6;
     public int speed;
+    public int activeGun;
     public float startHealDelay;
     public float healDelay;
     public GameManager gameManagerScript;
     bool tookDamage;
-
-   
+    public GameObject[] gunPrefabs;
+    public GameObject player;
+    public GameObject currentGun;
     
     public int gold = 0;
 
@@ -22,6 +24,8 @@ public class playerStats : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindWithTag("playerCharacter");
+        currentGun = GameObject.FindWithTag("gun");
         hp = totalHP;
         gameManagerScript = GameObject.Find("GameController").GetComponent<GameManager>();
     }
@@ -34,6 +38,8 @@ public class playerStats : MonoBehaviour
             StartCoroutine(startHealing());
             tookDamage = false;
         }
+        
+      
 
         gameManagerScript.goldText.text = "x" + gold.ToString();
         gameManagerScript.gemText.text = "x" + gems.ToString();
@@ -42,6 +48,27 @@ public class playerStats : MonoBehaviour
 
 
     }
+    public void changeGun(int activeGun)
+    {
+  
+       
+            Destroy(currentGun);
+        
+
+        // Safety check: make sure the index exists
+        if (activeGun >= 0 && activeGun < gunPrefabs.Length)
+        {
+           
+            currentGun = Instantiate(gunPrefabs[activeGun], player.GetComponent<Transform>().position, Quaternion.identity, player.GetComponent<Transform>());
+
+            Debug.Log("Equipped gun: " + activeGun);
+        }
+        else
+        {
+            currentGun = Instantiate(gunPrefabs[0], player.GetComponent<Transform>().position, Quaternion.identity);
+        }
+    }
+
     public static void ApplyDamage(GameObject Target, int damage = 0, int hpc = 0)
     {
         
@@ -67,15 +94,15 @@ public class playerStats : MonoBehaviour
     }
     IEnumerator startHealing()
     {
-        Debug.Log("initial delay begin");
+        
         yield return new WaitForSeconds(startHealDelay);
-        Debug.Log("initial delay over");
+       
         while (hp < totalHP)
         {
-            Debug.Log("you are damaged healing now");
+          
             yield return new WaitForSeconds(healDelay);
             hp++;
-            Debug.Log("you have been healed one hp");
+            
         }
     }
 

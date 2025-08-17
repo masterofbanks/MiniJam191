@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
             drillCam.SetActive(inDrill);
             mapCam.SetActive(!inDrill);
         }
+      
 
         UpdateHealth();
 
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
