@@ -87,6 +87,25 @@ public class Enemyscript : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            switch (enemyType)
+            {
+                case -1:
+                    player.GetComponent<playerStats>().gold += 20;
+                    Destroy(gameObject);
+                    break;
+
+                case 0:
+                    player.GetComponent<playerStats>().gold += 60;
+                    Destroy(gameObject);
+                    break;
+                case 1:
+                    player.GetComponent<playerStats>().gems += 30;
+                    Destroy(gameObject);
+                    break;
+
+
+            }
+
             player.GetComponent<playerStats>().gold += 60;
             Destroy(gameObject);
             

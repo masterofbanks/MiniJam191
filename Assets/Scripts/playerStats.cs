@@ -47,7 +47,7 @@ public class playerStats : MonoBehaviour
         if (targetHealth) targetHealth.healthUpdate(damage, hpc);
     }
 
-    public  void healthUpdate(int damage, int healthChange)
+    public  void healthUpdate(int damage =0, int healthChange=0)
     {
         hp -= damage;
         if (damage > 0)
