@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,7 +23,8 @@ public class DrillMovement : MonoBehaviour
     private Vector3 startPos;
     public shooting bullet;
     public depositParticleSpawner particleSpawner;
-    
+    public GameObject newAreaText;
+    public float blinkDuration = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -187,7 +189,7 @@ public class DrillMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("Wall"))
         {
             ResetPosition();
-
+            StartCoroutine(blinkText(newAreaText));
         }
 
     }
@@ -206,7 +208,16 @@ public class DrillMovement : MonoBehaviour
         depositWaveAmount = randAmount;
         float randRarity = UnityEngine.Random.Range(0.8f, 0.999f);
         rarity = randRarity;
+        rb.velocity = drillSpeed * Vector2.down;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.position = startPos;
         terrainGenScript.NewGeneration();
+    }
+
+    IEnumerator blinkText(GameObject obj)
+    {
+        obj.SetActive(true);
+        yield return new WaitForSeconds(blinkDuration);
+        obj.SetActive(false);
     }
 }
