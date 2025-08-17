@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NavMeshPlus.Components;
 
 public class PlayerCharacterMovement : MonoBehaviour
 {
@@ -22,7 +23,9 @@ public class PlayerCharacterMovement : MonoBehaviour
 
     public GameManager gameManager;
     public GameObject player;
+    public GameObject navSurf;
     private gunCrateType nearbyCrate;
+    private doorProperties nearbyDoor;
     private Rigidbody2D rb;
     private void Start()
     {
@@ -30,6 +33,7 @@ public class PlayerCharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameController").GetComponent<GameManager>();
         player = GameObject.FindWithTag("playerCharacter");
+        navSurf = GameObject.FindWithTag("navigationSurface");
     }
 
     private void FixedUpdate()
@@ -84,14 +88,23 @@ public class PlayerCharacterMovement : MonoBehaviour
             var stats = player.GetComponent<playerStats>();
             if (stats.gold >= nearbyCrate.cost)
             {
-                Debug.Log("Bought gun type " + nearbyCrate.gunType);
+              
                 stats.gold -= nearbyCrate.cost;
                 stats.changeGun(nearbyCrate.gunType);
             }
-            else
+           
+        }
+        if (nearbyDoor != null && Input.GetMouseButtonDown(1)) // right click
+        {
+            var stats = player.GetComponent<playerStats>();
+            if (stats.gems >= nearbyDoor.doorPrice)
             {
-                Debug.Log("Not enough gold!");
+
+                stats.gems -= nearbyDoor.doorPrice;
+                Destroy(nearbyDoor.gameObject);
+                navSurf.GetComponent<NavMeshSurface>().BuildNavMeshAsync();
             }
+
         }
 
 
@@ -115,6 +128,11 @@ public class PlayerCharacterMovement : MonoBehaviour
             nearbyCrate = collision.gameObject.GetComponent<gunCrateType>();
             Debug.Log("Entered crate zone");
         }
+        if (collision.gameObject.CompareTag("door"))
+        {
+            nearbyDoor = collision.gameObject.GetComponent<doorProperties>();
+           
+        }
     }
    
 
@@ -128,6 +146,11 @@ public class PlayerCharacterMovement : MonoBehaviour
         {
             nearbyCrate = null;
             
+        }
+        if (collision.gameObject.CompareTag("door"))
+        {
+            nearbyDoor = null;
+
         }
     }
 }

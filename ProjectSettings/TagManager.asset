@@ -17,6 +17,8 @@ TagManager:
   - playerCharacterMesh
   - gunCrate
   - gun
+  - door
+  - navigationSurface
   layers:
   - Default
   - TransparentFX

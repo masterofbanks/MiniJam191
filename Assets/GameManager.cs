@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        StartCoroutine(spawnWave(0, 1f, 0.95f, 0.95f));
+        StartCoroutine(spawnWave(2, 1f, 0.95f, 0.95f));
 
     }
 
