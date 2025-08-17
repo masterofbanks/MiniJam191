@@ -20,7 +20,6 @@ TagManager:
   - door
   - navigationSurface
   - onSpawners
-  - particleSpawner
   layers:
   - Default
   - TransparentFX
