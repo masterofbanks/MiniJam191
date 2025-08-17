@@ -17248,8 +17248,12 @@ PrefabInstance:
       value: -0.56568766
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
+      propertyPath: inDeposit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: drillSpeed
-      value: 5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: mineButton
