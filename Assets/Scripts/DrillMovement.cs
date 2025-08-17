@@ -20,7 +20,8 @@ public class DrillMovement : MonoBehaviour
     public int depositWaveAmount;
     public float rarity;
     private Vector3 startPos;
-
+    public shooting bullet;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class DrillMovement : MonoBehaviour
         inDeposit = false;
         startPos = transform.position;
         firstDirectionSet = false;
+        bullet = GameObject.FindGameObjectWithTag("gun").GetComponent<shooting>();
     }
 
     // Update is called once per frame
@@ -114,8 +116,66 @@ public class DrillMovement : MonoBehaviour
 
             else if(depositType == 4)
             {
-                //Do Stuff with upgrading
-                Debug.Log("Upgrade Deposit Hit");
+
+                string[] upgrades = { "velocity", "range", "damage", "accuracy", "piercing"};
+                float[] weights = { 0.3f, 0.3f, 0.10f, 0.25f, 0.05f };
+                float roll = Random.Range(0f, 1f);
+                float cumulative = 0f;
+                for (int i = 0; i < upgrades.Length; i++)
+                {
+                    cumulative += weights[i];
+                    if (roll <= cumulative)
+                    {
+                        
+                        switch (upgrades[i])
+                        {
+                            case "velocity":
+                                if (bullet.piercing)
+                                    bullet.upgradeBulletStats(bullet.gunVelocity*0.25f, 0, 0, 0, true, 0);
+                                else
+                                {
+                                    bullet.upgradeBulletStats(5, 0, 0, 0, false, 0);
+                                }
+                                break;
+                            case "range":
+                                if (bullet.piercing)
+                                    bullet.upgradeBulletStats(0, bullet.gunBulletRange*0.25f, 0, 0, true, 0);
+                                else
+                                {
+                                    bullet.upgradeBulletStats(0, 1, 0, 0, false, 0);
+                                }
+                                break;
+                            case "damage":
+                                if (bullet.piercing)
+                                    bullet.upgradeBulletStats(0, 0, bullet.gunDamage * 0.25f, 0, true, 0);
+                                else
+                                {
+                                    bullet.upgradeBulletStats(0, 0, 5, 0, false, 0);
+                                }
+                                break;
+                            case "accuracy":
+                                if (bullet.piercing)
+                                    bullet.upgradeBulletStats(0, 0, 0, bullet.gunAccuracy * 0.25f, true, 0);
+                                else
+                                {
+                                    bullet.upgradeBulletStats(0, 0, 0, 0.05f, false, 0);
+                                }
+                               
+                                break;
+                            case "piercing":
+                                if(bullet.piercing)
+                                bullet.upgradeBulletStats(0, 0, 0, 0, true, bullet.maxDamage*0.25f);
+                                else
+                                {
+                                    bullet.upgradeBulletStats(0, 0, 0, 0, true, 10);
+                                }
+                                break;
+                                
+                        }
+                        Debug.Log(upgrades[i]);
+                        break;
+                    }
+                }
             }
 
             inDeposit = true;

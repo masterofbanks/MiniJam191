@@ -38,7 +38,10 @@ public class shooting : MonoBehaviour
     {
 
     }
-
+    public void upgradeBulletStats(float bulletSpeed = 0, float Range = 0, float AD = 0, float accu = 0, bool pierce = false, float maxdamage = 0)
+    {
+        bullet.GetComponent<BulletScript>().upgradeBulletStats(bulletSpeed, Range, AD, accu, pierce, maxdamage);
+    }
     // Update is called once per frame
     void Update()
     {
