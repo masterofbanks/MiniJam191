@@ -25,6 +25,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     public GameObject player;
     public GameObject navSurf;
     public GameObject tooltip;
+    public shooting bullet;
     private gunCrateType nearbyCrate;
     private doorProperties nearbyDoor;
     private portalProperties nearbyPortal;
@@ -36,7 +37,9 @@ public class PlayerCharacterMovement : MonoBehaviour
         gameManager = GameObject.Find("GameController").GetComponent<GameManager>();
         player = GameObject.FindWithTag("playerCharacter");
         navSurf = GameObject.FindWithTag("navigationSurface");
-    }
+        bullet = GameObject.FindGameObjectWithTag("gun").GetComponent<shooting>();
+    
+}
 
     private void FixedUpdate()
     {
@@ -116,8 +119,13 @@ public class PlayerCharacterMovement : MonoBehaviour
 
                 stats.gems -= nearbyPortal.upgradecostGems;
                 stats.gold -= nearbyPortal.upgradecostGold;
-                Destroy(nearbyDoor.gameObject);
-                navSurf.GetComponent<NavMeshSurface>().BuildNavMeshAsync();
+                if (bullet.piercing)
+                    bullet.upgradeBulletStats(bullet.gunVelocity * 0.25f, 0, 0, 0, true, 0);
+                else
+                {
+                    bullet.upgradeBulletStats(15, 5, 15, 0.15f, true, 30);
+                }
+
             }
 
         }
