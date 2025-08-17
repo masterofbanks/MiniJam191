@@ -16513,14 +16513,14 @@ MonoBehaviour:
   goldText: {fileID: 363274985}
   gemText: {fileID: 610809126}
   drillMovementScript: {fileID: 1997695618}
-  startingWaveAmount: 0
-  finishingWaveAmount: 0
+  startingWaveAmount: 3
+  finishingWaveAmount: 8
   waveAmount: 2
   rateOfSpawn: 1
-  startTimeBetweenWaves: 0
-  endTimeBetweenWaves: 0
-  waveTimeScaler: 0
-  waveAmountScaler: 0
+  startTimeBetweenWaves: 10
+  endTimeBetweenWaves: 4
+  waveTimeScaler: 3000
+  waveAmountScaler: 200
 --- !u!4 &902681687
 Transform:
   m_ObjectHideFlags: 0
@@ -19715,7 +19715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: drillSpeed
-      value: 1.62
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: mineButton
@@ -19848,11 +19848,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4551177866146897763, guid: fdaeb0b463e4aec4ab7a5b80a6baa982, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.84
+      value: -11.96
       objectReference: {fileID: 0}
     - target: {fileID: 4551177866146897763, guid: fdaeb0b463e4aec4ab7a5b80a6baa982, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.96
+      value: -14.25
       objectReference: {fileID: 0}
     - target: {fileID: 4551177866146897763, guid: fdaeb0b463e4aec4ab7a5b80a6baa982, type: 3}
       propertyPath: m_LocalPosition.z
