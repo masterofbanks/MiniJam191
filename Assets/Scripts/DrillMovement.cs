@@ -15,12 +15,16 @@ public class DrillMovement : MonoBehaviour
     public GameObject targetDeposit;
     public GameObject mineButton;
     public GameManager gameManagerScript;
+    public TerrainGeneration terrainGenScript;
+
+    private Vector3 startPos;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         inDeposit = false;
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -107,8 +111,7 @@ public class DrillMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {
-            rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
-            transform.rotation = Quaternion.Euler(0, 0, 540 - aimAngle + 90);
+            ResetPosition();
 
         }
 
@@ -120,5 +123,13 @@ public class DrillMovement : MonoBehaviour
         if(targetDeposit != null)
             Destroy(targetDeposit);
             inDeposit = false;
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = startPos;
+        rb.velocity = Vector2.zero;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        terrainGenScript.NewGeneration();
     }
 }

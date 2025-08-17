@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject gruntPrefab;
     public GameObject Goldling;
     public GameObject Gemenie;
+
+    public TextMeshProUGUI goldText;
+    public TextMeshProUGUI gemText;
 
     public int waveAmount;
     public float rateOfSpawn = 0.55f; //how many enemies per second

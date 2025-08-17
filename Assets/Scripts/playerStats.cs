@@ -35,7 +35,10 @@ public class playerStats : MonoBehaviour
             tookDamage = false;
         }
 
-      
+        gameManagerScript.goldText.text = "x" + gold.ToString();
+        gameManagerScript.gemText.text = "x" + gems.ToString();
+
+
 
 
     }
