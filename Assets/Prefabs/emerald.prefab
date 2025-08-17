@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7216265940580729887}
   - component: {fileID: 7694423653291029145}
   m_Layer: 0
-  m_Name: gemeniePrefab
+  m_Name: emerald
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0330065d734c52a4c805e09569ba75f8, type: 2}
+  - {fileID: 2100000, guid: 86f6a08f36a161348ada947f1a1bd2e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,12 +104,12 @@ MonoBehaviour:
   damageAmount: 2
   slapSpeed: 0.7
   enemyType: 1
-  gemAmount: 30
+  gemAmount: 90
   slapping: 0
   inRange: 0
   gameManagerScript: {fileID: 0}
   player: {fileID: 0}
-  enemyHealth: 5
+  enemyHealth: 10
 --- !u!195 &8763793274687486875
 NavMeshAgent:
   m_ObjectHideFlags: 0

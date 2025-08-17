@@ -14,6 +14,7 @@ public class Enemyscript : MonoBehaviour
     public int damageAmount = 1;
     public float slapSpeed;
     public int enemyType;
+    public int gemAmount;
     public bool slapping =false;
     public bool inRange = false;
     GameObject crack;
@@ -92,16 +93,16 @@ public class Enemyscript : MonoBehaviour
 
                 case 0:
                     player.GetComponent<playerStats>().gold += 60;
-                    
+                   
                     break;
                 case 1:
                     player.GetComponent<playerStats>().gems += 30;
-                   
+              
                     break;
 
                    
             }
-           
+            player.GetComponent<playerStats>().enemyKillCount++;
             player.GetComponent<playerStats>().gold += 60;
             Destroy(gameObject);
             

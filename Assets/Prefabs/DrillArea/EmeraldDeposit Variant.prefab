@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136125027327993105, guid: 4de079316a5371849adc11e39cdc9a20, type: 3}
       propertyPath: m_TagString
-      value: emerald
+      value: Deposit
       objectReference: {fileID: 0}
     - target: {fileID: 2582545301759775003, guid: 4de079316a5371849adc11e39cdc9a20, type: 3}
       propertyPath: m_LocalPosition.x

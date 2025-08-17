@@ -11,39 +11,71 @@ public class GameManager : MonoBehaviour
 
     public GameObject mapCam;
     public GameObject drillCam;
-    public bool changeCam;
+    public bool nearTerminal;
     public GameObject spawnerParent;
     public GameObject healthContainer;
     public GameObject heartIcon;
     public GameObject gruntPrefab;
     public GameObject Goldling;
-    public GameObject Gemenie;
+    public GameObject[] Gemenies;
 
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI gemText;
+    public DrillMovement drillMovementScript;
 
-    public int waveAmount;
+    [Header("Wave Settings")]
+    public int startingWaveAmount;
+    public int finishingWaveAmount;
+    public int waveAmount = 0;
     public float rateOfSpawn = 0.55f; //how many enemies per second
+    public float startTimeBetweenWaves;
+    public float endTimeBetweenWaves;
+
+    public float waveTimeScaler; //make this bigger to make timeBetweenWaves decrease slower
+    public float waveAmountScaler; //make this bigger to make waveAmount increase slower
+
+    private float localTimeBetweenWave = 0f;
+    private float timeBetweenWaves;
+
+    private float decimalWaveAmount;
+    
+    private float t = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnerParent = GameObject.FindWithTag("spawners");
         inDrill = true;
-        changeCam = false;
+        nearTerminal = false;
+        waveAmount = startingWaveAmount;
+        timeBetweenWaves = startTimeBetweenWaves;
         int numHearts = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP;
         for(int i = 0; i < numHearts; i++)
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        StartCoroutine(spawnWave(2, 1f, 0.95f, 0.95f));
+        //StartCoroutine(spawnWave(15, 1f, 0.95f, 0.95f));
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(1) && changeCam)
+        if (drillMovementScript.firstDirectionSet)
+        {
+            t += Time.deltaTime;
+            UpdateTimeBetweenWaves(t);
+            UpdateWaveAmount(t);
+            localTimeBetweenWave += Time.deltaTime;
+        }
+        int currentKillCount = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount;
+        if (localTimeBetweenWave >= timeBetweenWaves && currentKillCount >= waveAmount)
+        {
+            localTimeBetweenWave = 0f;
+            StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.95f));
+        }
+
+        if (Input.GetMouseButtonDown(1) && nearTerminal)
         {
             inDrill = !inDrill;
             drillCam.SetActive(inDrill);
@@ -53,6 +85,23 @@ public class GameManager : MonoBehaviour
 
         UpdateHealth();
 
+    }
+
+    public void UpdateTimeBetweenWaves(float t)
+    {
+        // c exp(-t/a) + b
+        // c + b = startTimeBetweenWaves;
+        // b is the endTimeBetweenWaves;
+        float c = startTimeBetweenWaves - endTimeBetweenWaves;
+        timeBetweenWaves = c * Mathf.Exp(-t / waveTimeScaler) + endTimeBetweenWaves;
+    }
+
+    public void UpdateWaveAmount(float t)
+    {
+        // f(1 - exp(-x/waveAmountScaler) + startingWaveAmount
+
+        decimalWaveAmount = (finishingWaveAmount - startingWaveAmount) * (1 - Mathf.Exp(-t / waveAmountScaler)) + startingWaveAmount;
+        waveAmount = Mathf.FloorToInt(decimalWaveAmount);
     }
 
     public void UpdateHealth()
@@ -71,27 +120,25 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+       //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
 
 
-    public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial)
+    public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial, int gemType = 0)
     {
-        Debug.Log("01");
         float typeOf;
         int totalSpawnPoints = spawnerParent.transform.childCount;
+        GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount = 0;
         bool sucessfulspawn;
         GameObject enemy;
         for(int i = 0; i < amount; i++)
         {
-            Debug.Log("1");
            sucessfulspawn = false;
             yield return new WaitForSeconds(1f / ratePerSec);
             while (!sucessfulspawn)
             {
-                Debug.Log("2");
                 float roll = Random.Range(0f, 1f);
 
                 if (roll < typeRatioNormal)
@@ -120,7 +167,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case 1:
-                        enemy = Gemenie;
+                        enemy = Gemenies[gemType];
+                        Debug.Log("gemType: " + gemType);
+                        Debug.Log(Gemenies[gemType].name);
                         break;
                     default:
                         enemy = gruntPrefab;
@@ -136,7 +185,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    public IEnumerator spawnWave(int amount, float ratePerSec, int type)
+    public IEnumerator spawnWave(int amount, float ratePerSec, int type, int gemType = 1)
     {
 
         
@@ -162,7 +211,7 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case 1:
-                        enemy = Gemenie;
+                        enemy = Gemenies[gemType];
                         break;
                     default:
                         enemy = gruntPrefab;

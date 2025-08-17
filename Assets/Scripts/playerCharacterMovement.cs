@@ -136,7 +136,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("terminal"))
         {
-            gameManager.changeCam = true;
+            gameManager.nearTerminal = true;
         }
 
         if (collision.gameObject.CompareTag("gunCrate"))
@@ -156,7 +156,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("terminal"))
         {
-            gameManager.changeCam = false;
+            gameManager.nearTerminal = false;
         }
         if (collision.gameObject.CompareTag("gunCrate"))
         {
