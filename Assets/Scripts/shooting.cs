@@ -46,7 +46,11 @@ public class shooting : MonoBehaviour
     void Update()
     {
         bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy, piercing, maxDamage);
-        SetCrosshairPosition();
+        if (GameObject.FindWithTag("GameController").GetComponent<GameManager>().inDrill)
+        {
+            SetCrosshairPosition();
+
+        }
 
         if (!canFire )
         {
