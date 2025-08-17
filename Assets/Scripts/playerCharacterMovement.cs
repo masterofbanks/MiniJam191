@@ -115,7 +115,7 @@ public class PlayerCharacterMovement : MonoBehaviour
         {
             tooltip.GetComponent<toolTip>().Show("Right Click to Interact \n" + nearbyDoor.doorPrice + " Gems");
             
-        }else if(gameManager.changeCam)
+        }else if(gameManager.nearTerminal)
         {
             tooltip.GetComponent<toolTip>().Show("Right Click to Open Map");
         }
