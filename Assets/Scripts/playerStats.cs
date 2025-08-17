@@ -28,9 +28,7 @@ public class playerStats : MonoBehaviour
         if (tookDamage)
         {
             StopAllCoroutines();
-            Debug.Log("stopped");
             StartCoroutine(startHealing());
-            Debug.Log("started");
             tookDamage = false;
         }
 

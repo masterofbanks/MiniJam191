@@ -20,12 +20,15 @@ public class PlayerCharacterMovement : MonoBehaviour
     public float staminaRegen = 0.001f;
     public float staminaExaust = 0.003f;
 
+    public GameManager gameManager;
+
 
     private Rigidbody2D rb;
     private void Start()
     {
         stamina = maxStamina;
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.Find("GameController").GetComponent<GameManager>();
     }
 
     private void FixedUpdate()
@@ -80,6 +83,22 @@ public class PlayerCharacterMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("asscakses");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("terminal"))
+        {
+            gameManager.changeCam = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("terminal"))
+        {
+            gameManager.changeCam = false;
+        }
     }
 }
 

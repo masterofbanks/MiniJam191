@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject mapCam;
     public GameObject drillCam;
+    public bool changeCam;
     public GameObject spawnerParent;
     public GameObject healthContainer;
     public GameObject heartIcon;
@@ -15,24 +16,28 @@ public class GameManager : MonoBehaviour
     public GameObject Goldling;
     public GameObject Gemenie;
 
+    public int waveAmount;
+    public float rateOfSpawn = 0.55f; //how many enemies per second
+
     // Start is called before the first frame update
     void Start()
     {
         spawnerParent = GameObject.FindWithTag("spawners");
         inDrill = true;
+        changeCam = false;
         int numHearts = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP;
         for(int i = 0; i < numHearts; i++)
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        StartCoroutine(spawnWave(15, 0.55f, 0.95f, 0.05f));
-        Debug.Log("0");
+        StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.05f));
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1) && changeCam)
         {
             inDrill = !inDrill;
             drillCam.SetActive(inDrill);
