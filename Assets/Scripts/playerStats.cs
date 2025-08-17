@@ -49,7 +49,7 @@ public class playerStats : MonoBehaviour
 
     }
    
-    public void changeGun(int activeGun)
+    public  GameObject changeGun(int activeGun)
     {
   
        
@@ -68,6 +68,7 @@ public class playerStats : MonoBehaviour
         {
             currentGun = Instantiate(gunPrefabs[0], player.GetComponent<Transform>().position, Quaternion.identity);
         }
+        return currentGun;
     }
 
     public static void ApplyDamage(GameObject Target, int damage = 0, int hpc = 0)

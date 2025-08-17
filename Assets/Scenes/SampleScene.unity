@@ -17141,6 +17141,11 @@ PrefabInstance:
     - target: {fileID: 2244992497432306080, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.33
+      value: 1.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 697905329115910050, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3326581475005785478, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19867,8 +19872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9702cc19beddee468693a1fb2c150e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradecostGold: 10000
-  upgradecostGems: 2000
+  upgradecostGold: 1
+  upgradecostGems: 1
   upgradeString: 
 --- !u!61 &1979100677
 BoxCollider2D:
