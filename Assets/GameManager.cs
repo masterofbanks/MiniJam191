@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.95f));
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && nearTerminal)
         {
             inDrill = !inDrill;
             drillCam.SetActive(inDrill);
