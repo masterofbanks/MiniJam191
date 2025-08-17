@@ -17,6 +17,8 @@ public class shooting : MonoBehaviour
     
     [Header("gun stats")]
     public bool Semi;
+    public int burstAmount;
+    public float burstspeed;
     public float timeBetweenFiring; //firerate
     public float gunDamage;
     public float gunAccuracy;
@@ -34,12 +36,13 @@ public class shooting : MonoBehaviour
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        playerTrans = GameObject.FindWithTag("playerCharacterMesh").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy);
         mousepos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         if(Vector3.Distance(mousepos, gunTrans.position)<=10.12f)
         {
@@ -82,7 +85,7 @@ public class shooting : MonoBehaviour
             transform.localScale = scale;
         }
 
-        if (!canFire)
+        if (!canFire )
         {
             timer += Time.deltaTime;
             if(timer > timeBetweenFiring)
@@ -91,18 +94,31 @@ public class shooting : MonoBehaviour
                 timer = 0;
             }
         }
-
+        
         if (Input.GetMouseButton(0) && canFire &&!Semi)
         {
             canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
 
-        }else if(Input.GetMouseButtonDown(0) && canFire)
+        }
+        else if(Input.GetMouseButtonDown(0) && canFire)
         {
             canFire = false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            StartCoroutine(fireGun(bullet, Quaternion.identity, burstspeed, burstAmount));
         }
 
       
+    }
+    public IEnumerator fireGun(GameObject bullet, Quaternion rot, float burstSpeed, int burstAmount)
+    {
+        
+        for(int i = 0; i< burstAmount; i++)
+        {
+            
+            Vector3 bulletTrans = bulletTransform.position;
+            Instantiate(bullet, bulletTrans, rot);
+            yield return new WaitForSeconds(burstSpeed);
+        }
+     
     }
 }

@@ -13,8 +13,9 @@ public class playerStats : MonoBehaviour
     public float healDelay;
     public GameManager gameManagerScript;
     bool tookDamage;
-
-   
+    public GameObject[] gunPrefabs;
+    public GameObject player;
+    public GameObject currentGun;
     
     public int gold = 0;
 
@@ -23,6 +24,8 @@ public class playerStats : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindWithTag("playerCharacter");
+        currentGun = GameObject.FindWithTag("gun");
         hp = totalHP;
         gameManagerScript = GameObject.Find("GameController").GetComponent<GameManager>();
     }
@@ -47,48 +50,22 @@ public class playerStats : MonoBehaviour
     }
     public void changeGun(int activeGun)
     {
-        switch (activeGun)
+  
+       
+            Destroy(currentGun);
+        
+
+        // Safety check: make sure the index exists
+        if (activeGun >= 0 && activeGun < gunPrefabs.Length)
         {
-            case 0:
-                //default pistol
-                break;
-            case 1:
-                //stronger pistol
-                break;
-            case 2:
-                //burst rifle
-                break;
-            case 3:
-                //semi auto rifle
-                break;
-            case 4:
-                //shotgun
-                break;
-            case 5:
-                //auto rifle
-                break;
-            case 6:
-                //smg
-                break;
-            case 7:
-                //sniper
-                break;
-            case 8:
-                //laser
-                break;
-            case 9:
-                //mini gun
-                break;
-            case 10:
-                //rocket launcher special rare (need to add explosion mechanic)
-                break;
-            default:
-                //default pistol
-                break;
+           
+            currentGun = Instantiate(gunPrefabs[activeGun], player.GetComponent<Transform>().position, Quaternion.identity, player.GetComponent<Transform>());
 
-
-
-
+            Debug.Log("Equipped gun: " + activeGun);
+        }
+        else
+        {
+            currentGun = Instantiate(gunPrefabs[0], player.GetComponent<Transform>().position, Quaternion.identity);
         }
     }
 
@@ -117,15 +94,15 @@ public class playerStats : MonoBehaviour
     }
     IEnumerator startHealing()
     {
-        Debug.Log("initial delay begin");
+        
         yield return new WaitForSeconds(startHealDelay);
-        Debug.Log("initial delay over");
+       
         while (hp < totalHP)
         {
-            Debug.Log("you are damaged healing now");
+          
             yield return new WaitForSeconds(healDelay);
             hp++;
-            Debug.Log("you have been healed one hp");
+            
         }
     }
 

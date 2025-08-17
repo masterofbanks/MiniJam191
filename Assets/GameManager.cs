@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        StartCoroutine(spawnWave(15, 1f, 0.95f, 0.95f));
+        StartCoroutine(spawnWave(0, 1f, 0.95f, 0.95f));
 
     }
 
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
             drillCam.SetActive(inDrill);
             mapCam.SetActive(!inDrill);
         }
+      
 
         UpdateHealth();
 
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
