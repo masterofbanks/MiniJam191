@@ -77,15 +77,28 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && nearTerminal)
         {
-            inDrill = !inDrill;
-            drillCam.SetActive(inDrill);
-            mapCam.SetActive(!inDrill);
+            FlipCams();
+            
             GameObject.FindWithTag("playerCharacter").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
       
 
         UpdateHealth();
 
+    }
+
+    public void FlipCams()
+    {
+        inDrill = !inDrill;
+        drillCam.SetActive(inDrill);
+        mapCam.SetActive(!inDrill);
+    }
+
+    public void GoBackToMainCam()
+    {
+        inDrill = true;
+        drillCam.SetActive(true);
+        mapCam.SetActive(false);
     }
 
     public void UpdateTimeBetweenWaves(float t)
@@ -130,7 +143,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial, int gemType = 0)
     {
         float typeOf;
-        int totalSpawnPoints = spawnerParent.transform.childCount;
+        int totalSpawnPoints = GameObject.FindGameObjectsWithTag("onSpawners").Length;
         GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount = 0;
         bool sucessfulspawn;
         GameObject enemy;
@@ -177,10 +190,10 @@ public class GameManager : MonoBehaviour
                         break;
 
                 }
-                
+
 
                 int childNum = Random.Range(0, totalSpawnPoints);
-                sucessfulspawn = spawnerParent.transform.GetChild(childNum).GetComponent<enemyManager>().trySpawnEnemy(enemy);
+                sucessfulspawn = GameObject.FindGameObjectsWithTag("onSpawners")[childNum].GetComponent<enemyManager>().trySpawnEnemy(enemy);
             }
 
         }
@@ -190,7 +203,7 @@ public class GameManager : MonoBehaviour
     {
 
         
-        int totalSpawnPoints = spawnerParent.transform.childCount;
+        int totalSpawnPoints = GameObject.FindGameObjectsWithTag("onSpawners").Length;
         bool sucessfulspawn;
         GameObject enemy;
         for (int i = 0; i < amount; i++)
@@ -219,10 +232,10 @@ public class GameManager : MonoBehaviour
                         break;
 
                 }
-
+                
 
                 int childNum = Random.Range(0, totalSpawnPoints);
-                sucessfulspawn = spawnerParent.transform.GetChild(childNum).GetComponent<enemyManager>().trySpawnEnemy(enemy);
+                sucessfulspawn = GameObject.FindGameObjectsWithTag("onSpawners")[childNum].GetComponent<enemyManager>().trySpawnEnemy(enemy);
             }
 
         }

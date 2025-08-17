@@ -106,6 +106,7 @@ public class PlayerCharacterMovement : MonoBehaviour
             {
 
                 stats.gems -= nearbyDoor.doorPrice;
+                nearbyDoor.GetComponent<doorProperties>().turnSpawnersOn();
                 Destroy(nearbyDoor.gameObject);
                 navSurf.GetComponent<NavMeshSurface>().BuildNavMeshAsync();
             }
@@ -187,6 +188,7 @@ public class PlayerCharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("terminal"))
         {
             gameManager.nearTerminal = false;
+            gameManager.GoBackToMainCam();
         }
         if (collision.gameObject.CompareTag("gunCrate"))
         {
