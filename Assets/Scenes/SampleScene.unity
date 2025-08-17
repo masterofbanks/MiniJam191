@@ -13491,6 +13491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inDrill: 0
+  planet: 0
   mapCam: {fileID: 1348409799}
   drillCam: {fileID: 1031185257}
   changeCam: 0
@@ -13500,7 +13501,7 @@ MonoBehaviour:
   gruntPrefab: {fileID: 8433337167885883200, guid: c63f43db47ae1e84a925f1cfd832b721, type: 3}
   Goldling: {fileID: 8823358096272483369, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
   Gemenie: {fileID: 3679047692872180581, guid: 595925f5eccbf6044b5508b24d59be88, type: 3}
-  waveAmount: 15
+  waveAmount: 0
   rateOfSpawn: 0.05
 --- !u!4 &902681687
 Transform:
@@ -15174,6 +15175,8 @@ MonoBehaviour:
   speed: 0
   startHealDelay: 2
   healDelay: 2
+  gold: 0
+  gems: 0
 --- !u!114 &1450162134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15194,6 +15197,7 @@ MonoBehaviour:
   exausted: 0
   staminaRegen: 0.001
   staminaExaust: 0.005
+  gameManager: {fileID: 0}
 --- !u!58 &1450162135
 CircleCollider2D:
   m_ObjectHideFlags: 0

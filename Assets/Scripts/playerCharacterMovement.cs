@@ -35,7 +35,11 @@ public class PlayerCharacterMovement : MonoBehaviour
     {
         hori = Input.GetAxisRaw("Horizontal");
         verti = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(hori * speed, verti * speed);
+        if(gameManager.inDrill)
+        {
+            rb.velocity = new Vector2(hori * speed, verti * speed);
+
+        }
         if (Input.GetKey("left shift") && stamina > 0)
         {
             if (!exausted)
