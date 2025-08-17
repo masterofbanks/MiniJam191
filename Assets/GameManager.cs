@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
             inDrill = !inDrill;
             drillCam.SetActive(inDrill);
             mapCam.SetActive(!inDrill);
+            GameObject.FindWithTag("playerCharacter").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
       
 

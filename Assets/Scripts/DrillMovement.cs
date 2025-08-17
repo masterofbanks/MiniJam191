@@ -21,10 +21,12 @@ public class DrillMovement : MonoBehaviour
     public float rarity;
     private Vector3 startPos;
     public shooting bullet;
+    public depositParticleSpawner particleSpawner;
     
     // Start is called before the first frame update
     void Start()
     {
+        particleSpawner = GameObject.FindGameObjectWithTag("particleSpawner").GetComponent<depositParticleSpawner>();
         rb = GetComponent<Rigidbody2D>();
         inDeposit = false;
         startPos = transform.position;
@@ -95,7 +97,7 @@ public class DrillMovement : MonoBehaviour
     {
         return angle > 185f && angle < 355f;
     }
-
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
@@ -106,12 +108,12 @@ public class DrillMovement : MonoBehaviour
             if (depositType == 0)
             {
                 StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 1- rarity, rarity, 0));
-                
+                particleSpawner.spawnOre(depositType+4);
             }
             else if(depositType < 4)
             {
                 StartCoroutine(gameManagerScript.spawnWave(depositWaveAmount, 0.55f, 0.05f, 0.05f, depositType - 1));
-
+                particleSpawner.spawnOre(depositType);
             }
 
             else if(depositType == 4)
