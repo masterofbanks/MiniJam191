@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: gunType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: Burst Rifle
+      objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
       value: gunCrate (2)
@@ -15201,6 +15205,10 @@ PrefabInstance:
       propertyPath: gunType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: Semi Auto rifle
+      objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
       value: gunCrate (3)
@@ -15269,6 +15277,10 @@ PrefabInstance:
     - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: gunType
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: SMG
       objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
@@ -16590,7 +16602,10 @@ MonoBehaviour:
   heartIcon: {fileID: 4948803006023672283, guid: cb0f2b566a5fdde46a533b399e01dbd5, type: 3}
   gruntPrefab: {fileID: 8433337167885883200, guid: c63f43db47ae1e84a925f1cfd832b721, type: 3}
   Goldling: {fileID: 8823358096272483369, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
-  Gemenies: []
+  Gemenies:
+  - {fileID: 3679047692872180581, guid: e3e4f750ad05def45bd0728d9781d581, type: 3}
+  - {fileID: 3679047692872180581, guid: 8669e223aadf11844a76578bad761759, type: 3}
+  - {fileID: 3679047692872180581, guid: a1bb84b9a334333468a55d023e8c37be, type: 3}
   goldText: {fileID: 363274985}
   gemText: {fileID: 610809126}
   drillMovementScript: {fileID: 1997695618}
@@ -16670,6 +16685,10 @@ PrefabInstance:
       propertyPath: gunType
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: Auto Rfile
+      objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
       value: gunCrate (5)
@@ -16743,6 +16762,10 @@ PrefabInstance:
     - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: gunType
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: minigun
       objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
@@ -16907,6 +16930,10 @@ PrefabInstance:
     - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: gunType
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: Sniper
       objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
@@ -19060,6 +19087,10 @@ PrefabInstance:
       propertyPath: gunType
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: laser
+      objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
       value: gunCrate (8)
@@ -19349,6 +19380,10 @@ PrefabInstance:
     - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: gunType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: stronger pistol
       objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name
@@ -20103,7 +20138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: drillSpeed
-      value: 0.075
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: mineButton
@@ -20560,6 +20595,10 @@ PrefabInstance:
     - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: gunType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098731482940840384, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
+      propertyPath: gunString
+      value: default pistol
       objectReference: {fileID: 0}
     - target: {fileID: 3820588669128540058, guid: c24dd679e7881b34aa03ccede869492d, type: 3}
       propertyPath: m_Name

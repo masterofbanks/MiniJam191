@@ -69,7 +69,7 @@ public class BulletScript : MonoBehaviour
 
 
     }
-    public void upgradeBulletStats(float bulletSpeed, float Range, float AD, float accu)
+    public void upgradeBulletStats(float bulletSpeed = 0, float Range = 0, float AD =0 , float accu=0, bool pierce = false, float maxdamage=0)
     {
         if (accu+accuracy > 1)
         {
@@ -82,6 +82,8 @@ public class BulletScript : MonoBehaviour
         force += bulletSpeed;
         travelTime += Range;
         bulletDamage += AD;
+        piercing = pierce;
+        maxDamageCapacity += maxdamage;
     }
     public void updateBulletStats(float bulletSpeed, float Range, float AD, float accu, bool pierce,float maxdamage)
     {
