@@ -38,6 +38,11 @@ public class playerStats : MonoBehaviour
         
       
 
+        gameManagerScript.goldText.text = "x" + gold.ToString();
+        gameManagerScript.gemText.text = "x" + gems.ToString();
+
+
+
 
     }
     public void changeGun(int activeGun)
