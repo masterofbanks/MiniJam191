@@ -10,7 +10,7 @@ public class playerStats : MonoBehaviour
     public int speed;
     public float startHealDelay;
     public float healDelay;
-    
+    public GameManager gameManagerScript;
     bool tookDamage;
 
    
@@ -50,6 +50,10 @@ public class playerStats : MonoBehaviour
     public  void healthUpdate(int damage =0, int healthChange=0)
     {
         hp -= damage;
+        if(hp <= 0)
+        {
+            gameManagerScript.gameOver();
+        }
         if (damage > 0)
         {
             tookDamage = true;
