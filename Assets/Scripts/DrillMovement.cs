@@ -90,14 +90,14 @@ public class DrillMovement : MonoBehaviour
         {
             if (depositType == 0)
             {
-                gameManagerScript.spawnWave(15, 0.55f, 0.95f, 0.05f);
+                StartCoroutine(gameManagerScript.spawnWave(15, 0.55f, 0.05f, 0.95f));
                 inDeposit = true;
                 rb.velocity = Vector2.zero;
                 targetDeposit = collision.gameObject;
             }
             else
             {
-                gameManagerScript.spawnWave(15, 0.55f, 0.95f, 0.95f);
+                StartCoroutine(gameManagerScript.spawnWave(15, 0.55f, 0.05f, 0.05f));
                 inDeposit = true;
                 rb.velocity = Vector2.zero;
                 targetDeposit = collision.gameObject;

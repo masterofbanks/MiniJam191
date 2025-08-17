@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        StartCoroutine(spawnWave(15, 0.55f, 0.95f, 0.05f));
-        Debug.Log("0");
+        StartCoroutine(spawnWave(100, 0.12f, 0.95f, 0.95f));
+
     }
 
     // Update is called once per frame
