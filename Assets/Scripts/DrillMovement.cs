@@ -16,6 +16,7 @@ public class DrillMovement : MonoBehaviour
     public GameObject mineButton;
     public GameManager gameManagerScript;
     public TerrainGeneration terrainGenScript;
+    public bool firstDirectionSet;
 
     private Vector3 startPos;
 
@@ -25,6 +26,7 @@ public class DrillMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         inDeposit = false;
         startPos = transform.position;
+        firstDirectionSet = false;
     }
 
     // Update is called once per frame
@@ -35,6 +37,11 @@ public class DrillMovement : MonoBehaviour
         {
             rb.velocity = aimDirection * drillSpeed;
             transform.rotation = Quaternion.Euler(0, 0, aimAngle + 90f);
+            if (!firstDirectionSet)
+            {
+                firstDirectionSet = true;
+                StartCoroutine(gameManagerScript.spawnWave(15, 1f, 0.95f, 0.95f));
+            }
         }
             
         mineButton.SetActive(inDeposit);
@@ -128,8 +135,6 @@ public class DrillMovement : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = startPos;
-        rb.velocity = Vector2.zero;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
         terrainGenScript.NewGeneration();
     }
 }
