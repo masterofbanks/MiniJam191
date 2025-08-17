@@ -19,6 +19,7 @@ TagManager:
   - gun
   - door
   - navigationSurface
+  - onSpawners
   layers:
   - Default
   - TransparentFX

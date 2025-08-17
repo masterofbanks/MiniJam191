@@ -102,6 +102,7 @@ public class PlayerCharacterMovement : MonoBehaviour
             {
 
                 stats.gems -= nearbyDoor.doorPrice;
+                nearbyDoor.GetComponent<doorProperties>().turnSpawnersOn();
                 Destroy(nearbyDoor.gameObject);
                 navSurf.GetComponent<NavMeshSurface>().BuildNavMeshAsync();
             }

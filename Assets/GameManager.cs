@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator spawnWave(int amount, float ratePerSec, float typeRatioNormal, float typeRatioSpecial, int gemType = 0)
     {
         float typeOf;
-        int totalSpawnPoints = spawnerParent.transform.childCount;
+        int totalSpawnPoints = GameObject.FindGameObjectsWithTag("onSpawners").Length;
         GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount = 0;
         bool sucessfulspawn;
         GameObject enemy;
@@ -188,10 +188,10 @@ public class GameManager : MonoBehaviour
                         break;
 
                 }
-                
+
 
                 int childNum = Random.Range(0, totalSpawnPoints);
-                sucessfulspawn = spawnerParent.transform.GetChild(childNum).GetComponent<enemyManager>().trySpawnEnemy(enemy);
+                sucessfulspawn = GameObject.FindGameObjectsWithTag("onSpawners")[childNum].GetComponent<enemyManager>().trySpawnEnemy(enemy);
             }
 
         }
@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
     {
 
         
-        int totalSpawnPoints = spawnerParent.transform.childCount;
+        int totalSpawnPoints = GameObject.FindGameObjectsWithTag("onSpawners").Length;
         bool sucessfulspawn;
         GameObject enemy;
         for (int i = 0; i < amount; i++)
@@ -230,10 +230,10 @@ public class GameManager : MonoBehaviour
                         break;
 
                 }
-
+                
 
                 int childNum = Random.Range(0, totalSpawnPoints);
-                sucessfulspawn = spawnerParent.transform.GetChild(childNum).GetComponent<enemyManager>().trySpawnEnemy(enemy);
+                sucessfulspawn = GameObject.FindGameObjectsWithTag("onSpawners")[childNum].GetComponent<enemyManager>().trySpawnEnemy(enemy);
             }
 
         }

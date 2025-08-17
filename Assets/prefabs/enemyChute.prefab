@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7352465742974671430}
   m_Layer: 0
   m_Name: enemyChute
-  m_TagString: Untagged
+  m_TagString: onSpawners
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,4 +168,4 @@ MonoBehaviour:
   spawnTrans: {fileID: 4551177866146897763}
   timeBetweenEnemySpawns: 2
   enemy: {fileID: 8823358096272483369, guid: 072984e574f871c4d9d134e9e920a8a8, type: 3}
-  t: 0
+  occupied: 0
