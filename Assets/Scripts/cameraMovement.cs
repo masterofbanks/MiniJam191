@@ -18,8 +18,7 @@ public class cameraMovement : MonoBehaviour
         
     }
 
-
-    void Update()
+    private void FixedUpdate()
     {
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
@@ -29,6 +28,11 @@ public class cameraMovement : MonoBehaviour
             offset = offset.normalized * camPushMax;
         }
         transform.position = new Vector3(playerTrans.position.x + offset.x, playerTrans.position.y + offset.y, -10f);
+    }
+
+    void Update()
+    {
+        
     
    
 

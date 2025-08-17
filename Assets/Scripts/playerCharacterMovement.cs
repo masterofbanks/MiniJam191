@@ -21,23 +21,18 @@ public class PlayerCharacterMovement : MonoBehaviour
     public float staminaExaust = 0.003f;
 
 
+    private Rigidbody2D rb;
     private void Start()
     {
         stamina = maxStamina;
+        rb = GetComponent<Rigidbody2D>();
     }
-    void Update()
+
+    private void FixedUpdate()
     {
-        //recieves wasd as input assiging a value from -1 to 1
         hori = Input.GetAxisRaw("Horizontal");
         verti = Input.GetAxisRaw("Vertical");
-
-
-        //uses change in time, a preset speed variable, and input to move character
-        transform.Translate(Time.deltaTime * Vector2.up * speed * verti);
-        transform.Translate(Time.deltaTime * Vector2.right * speed * hori);
-
-
-
+        rb.velocity = new Vector2(hori * speed, verti * speed);
         if (Input.GetKey("left shift") && stamina > 0)
         {
             if (!exausted)
@@ -65,6 +60,20 @@ public class PlayerCharacterMovement : MonoBehaviour
         {
             exausted = false;
         }
+    }
+    void Update()
+    {
+        //recieves wasd as input assiging a value from -1 to 1
+        
+
+
+        ////uses change in time, a preset speed variable, and input to move character
+        //transform.Translate(Time.deltaTime * Vector2.up * speed * verti);
+        //transform.Translate(Time.deltaTime * Vector2.right * speed * hori);
+
+        
+
+        
 
     }
 
