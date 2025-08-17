@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && nearTerminal)
         {
             FlipCams();
+            
+            GameObject.FindWithTag("playerCharacter").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
       
 
