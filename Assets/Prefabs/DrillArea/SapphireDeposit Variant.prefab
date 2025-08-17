@@ -64,9 +64,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7137691572944689678, guid: 353fb2e25792c08498f1742ec4e27ca2, type: 3}
+      propertyPath: depositTypeOf
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9001820690039287350, guid: 353fb2e25792c08498f1742ec4e27ca2, type: 3}
       propertyPath: m_Name
       value: SapphireDeposit Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001820690039287350, guid: 353fb2e25792c08498f1742ec4e27ca2, type: 3}
+      propertyPath: m_TagString
+      value: Deposit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

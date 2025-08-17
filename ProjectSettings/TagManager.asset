@@ -8,6 +8,11 @@ TagManager:
   - Wall
   - Enemy
   - playerCharacter
+  - spawners
+  - gold
+  - ruby
+  - emerald
+  - sapphire
   layers:
   - Default
   - TransparentFX

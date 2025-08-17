@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
+        spawnWave(15, 0.55f, 0.95f, 0.05f);
+
     }
 
     // Update is called once per frame
@@ -64,11 +66,12 @@ public class GameManager : MonoBehaviour
         GameObject enemy;
         for(int i = 0; i < amount; i++)
         {
-           
+            Debug.Log("1");
            sucessfulspawn = false;
             yield return new WaitForSeconds(1f / ratePerSec);
             while (!sucessfulspawn)
             {
+                Debug.Log("2");
                 float roll = Random.Range(0f, 1f);
 
                 if (roll < typeRatioNormal)
@@ -107,7 +110,7 @@ public class GameManager : MonoBehaviour
                 
 
                 int childNum = Random.Range(0, totalSpawnPoints);
-                spawnerParent.transform.GetChild(childNum).GetComponent<enemyManager>().trySpawnEnemy(enemy);
+                sucessfulspawn = spawnerParent.transform.GetChild(childNum).GetComponent<enemyManager>().trySpawnEnemy(enemy);
             }
 
         }

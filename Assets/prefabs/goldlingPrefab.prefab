@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8823358096272483379}
   - component: {fileID: 2704278601063283456}
   m_Layer: 0
-  m_Name: badguy
+  m_Name: goldlingPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
