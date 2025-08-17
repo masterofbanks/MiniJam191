@@ -13,12 +13,15 @@ public class BulletScript : MonoBehaviour
     public float bulletDamage;
     public float travelTime;
     public float accuracy; 
-
+    public bool piercing;
     public float timer;
+    public float maxDamageCapacity; 
+    private float damageLeft;
 
     // Start is called before the first frame update
     void Start()
     {
+        damageLeft = maxDamageCapacity;
         GameObject meshObj = GameObject.Find("playerCharacterMesh");
         if (meshObj != null)
         {
@@ -80,12 +83,14 @@ public class BulletScript : MonoBehaviour
         travelTime += Range;
         bulletDamage += AD;
     }
-    public void updateBulletStats(float bulletSpeed, float Range, float AD, float accu)
+    public void updateBulletStats(float bulletSpeed, float Range, float AD, float accu, bool pierce,float maxdamage)
     {
         force = bulletSpeed;
         travelTime = Range;
         bulletDamage = AD;
         accuracy = accu;
+        piercing = pierce;
+        maxDamageCapacity = maxdamage;
        
 
     }
@@ -103,11 +108,16 @@ public class BulletScript : MonoBehaviour
     {
         
         
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") )
         {
-            Destroy(gameObject);
-            
             Enemyscript.bulletHit(other.gameObject, bulletDamage);
+            damageLeft -= bulletDamage;
+
+            if (!piercing || damageLeft <= 0f)
+            {
+                Destroy(gameObject);
+            }
+           
         }
 
         else if (other.gameObject.CompareTag("Wall"))

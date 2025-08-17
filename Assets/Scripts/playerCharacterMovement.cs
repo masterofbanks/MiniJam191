@@ -24,6 +24,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     public GameManager gameManager;
     public GameObject player;
     public GameObject navSurf;
+    public GameObject tooltip;
     private gunCrateType nearbyCrate;
     private doorProperties nearbyDoor;
     private Rigidbody2D rb;
@@ -106,7 +107,22 @@ public class PlayerCharacterMovement : MonoBehaviour
             }
 
         }
-
+        if (nearbyCrate != null)
+        {
+            tooltip.GetComponent<toolTip>().Show("Right Click to Interact \n" + nearbyCrate.gunString + " " + nearbyCrate.cost + " Gold");
+        }
+        else if (nearbyDoor != null)
+        {
+            tooltip.GetComponent<toolTip>().Show("Right Click to Interact \n" + nearbyDoor.doorPrice + " Gems");
+            
+        }else if(gameManager.changeCam)
+        {
+            tooltip.GetComponent<toolTip>().Show("Right Click to Open Map");
+        }
+        else
+        {
+            tooltip.GetComponent<toolTip>().Hide();
+        }
 
 
     }
