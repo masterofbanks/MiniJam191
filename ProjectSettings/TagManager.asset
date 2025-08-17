@@ -21,6 +21,7 @@ TagManager:
   - navigationSurface
   - onSpawners
   - particleSpawner
+  - upgradePortal
   layers:
   - Default
   - TransparentFX
