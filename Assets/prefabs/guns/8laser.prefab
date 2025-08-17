@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: -3302408636691179782}
   m_Layer: 0
   m_Name: 8laser
-  m_TagString: Untagged
+  m_TagString: gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,11 +169,11 @@ MonoBehaviour:
   canFire: 1
   piercing: 0
   Semi: 0
-  burstAmount: 1
+  burstAmount: 40
   burstspeed: 0
-  timeBetweenFiring: 0.001
-  gunDamage: 0.5
-  gunAccuracy: 1
+  timeBetweenFiring: 1
+  gunDamage: 2
+  gunAccuracy: 0.2
   gunBulletRange: 20
   gunVelocity: 7
   maxDamage: 0

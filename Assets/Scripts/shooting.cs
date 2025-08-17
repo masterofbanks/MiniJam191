@@ -40,12 +40,17 @@ public class shooting : MonoBehaviour
     }
     public void upgradeBulletStats(float bulletSpeed = 0, float Range = 0, float AD = 0, float accu = 0, bool pierce = false, float maxdamage = 0)
     {
-        bullet.GetComponent<BulletScript>().upgradeBulletStats(bulletSpeed, Range, AD, accu, pierce, maxdamage);
+        gunVelocity += bulletSpeed;
+        gunBulletRange += Range;
+        gunDamage += AD;
+        gunAccuracy = Mathf.Clamp(gunAccuracy + accu, 0, 1); // make sure between 0–1
+        piercing = pierce || piercing; // keep piercing true if ever set
+        maxDamage += maxdamage;
     }
     // Update is called once per frame
     void Update()
     {
-        bullet.GetComponent<BulletScript>().updateBulletStats(gunVelocity, gunBulletRange, gunDamage, gunAccuracy, piercing, maxDamage);
+        
         SetCrosshairPosition();
 
         if (!canFire )
@@ -78,15 +83,23 @@ public class shooting : MonoBehaviour
 
         for (int i = 0; i < burstAmount; i++)
         {
-
             Vector3 bulletTrans = bulletTransform.position;
             GameObject bulletObj = Instantiate(bullet, bulletTrans, rot);
+
+            // Copy the current gun stats into THIS bullet instance
+            bulletObj.GetComponent<BulletScript>().updateBulletStats(
+                gunVelocity,
+                gunBulletRange,
+                gunDamage,
+                gunAccuracy,
+                piercing,
+                maxDamage
+            );
+
             bulletObj.GetComponent<BulletScript>().direction = aimDirection;
+
             yield return new WaitForSeconds(burstSpeed);
         }
-
-        yield return new WaitForSeconds(0.1f);
-     
     }
 
     private void SetCrosshairPosition()

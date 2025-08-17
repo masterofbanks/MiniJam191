@@ -88,16 +88,20 @@ public class PlayerCharacterMovement : MonoBehaviour
         //transform.Translate(Time.deltaTime * Vector2.up * speed * verti);
         //transform.Translate(Time.deltaTime * Vector2.right * speed * hori);
 
-        if (nearbyCrate != null && Input.GetMouseButtonDown(1)) // right click
+        if (nearbyCrate != null && Input.GetMouseButtonDown(1))
         {
             var stats = player.GetComponent<playerStats>();
             if (stats.gold >= nearbyCrate.cost)
             {
-              
                 stats.gold -= nearbyCrate.cost;
-                stats.changeGun(nearbyCrate.gunType);
+
+                // Instantiate the new gun and get its reference directly
+                GameObject newGun = stats.changeGun(nearbyCrate.gunType); // make changeGun return the new gun
+                if (newGun != null)
+                {
+                    bullet = newGun.GetComponent<shooting>();
+                }
             }
-           
         }
         if (nearbyDoor != null && Input.GetMouseButtonDown(1)) // right click
         {
@@ -121,7 +125,11 @@ public class PlayerCharacterMovement : MonoBehaviour
                 stats.gems -= nearbyPortal.upgradecostGems;
                 stats.gold -= nearbyPortal.upgradecostGold;
                 if (bullet.piercing)
-                    bullet.upgradeBulletStats(bullet.gunVelocity * 0.25f, 0, 0, 0, true, 0);
+                    bullet.upgradeBulletStats(bullet.gunVelocity * 0.25f, bullet.gunBulletRange*0.25f , bullet.gunDamage*0.25f, bullet.gunAccuracy * 0.25f, true, bullet.maxDamage*0.25f);
+                else if (bullet.gunAccuracy < 0.5)
+                {
+                    bullet.upgradeBulletStats(bullet.gunVelocity * 0.25f, bullet.gunBulletRange * 0.25f, bullet.gunDamage * 0.25f, 0, true, bullet.maxDamage * 0.25f);
+                }
                 else
                 {
                     bullet.upgradeBulletStats(15, 5, 15, 0.15f, true, 30);
@@ -199,6 +207,10 @@ public class PlayerCharacterMovement : MonoBehaviour
         {
             nearbyDoor = null;
 
+        }
+        if (collision.gameObject.CompareTag("upgradePortal"))
+        {
+            nearbyPortal = null;
         }
        
     }
