@@ -103,18 +103,18 @@ public class DrillMovement : MonoBehaviour
             if (depositType == 0)
             {
                 StartCoroutine(gameManagerScript.spawnWave(15, 0.55f, 0.05f, 0.95f));
-                inDeposit = true;
-                targetDeposit = collision.gameObject;
-                Mine();
+                
             }
             else
             {
                 StartCoroutine(gameManagerScript.spawnWave(15, 0.55f, 0.05f, 0.05f));
-                inDeposit = true;
-                targetDeposit = collision.gameObject;
-                Mine();
+                
 
             }
+
+            inDeposit = true;
+            targetDeposit = collision.gameObject;
+            Mine();
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {

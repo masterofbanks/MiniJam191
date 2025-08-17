@@ -16,6 +16,7 @@ public class TerrainGeneration : MonoBehaviour
     [Header("Deposits")]
     public GameObject goldDeposit;
     public GameObject rareOreDeposit;
+    public GameObject[] oreTypes;
 
     [Header("Deposit Frequencies")]
     public float rareSpawnRateScaler;
@@ -37,8 +38,10 @@ public class TerrainGeneration : MonoBehaviour
     {
         scale = startingScale;
         DestroyDeposits();
+        int randIndex = UnityEngine.Random.Range(0, oreTypes.Length);
+        rareOreDeposit = oreTypes[randIndex];
 
-        while(currentNumberOfDeposits < minNumberOfDeposits)
+        while (currentNumberOfDeposits < minNumberOfDeposits)
         {
             DestroyDeposits();
             offsetX = UnityEngine.Random.Range(0f, 99999f);
