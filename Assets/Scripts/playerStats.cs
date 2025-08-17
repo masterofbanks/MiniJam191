@@ -15,8 +15,10 @@ public class playerStats : MonoBehaviour
 
    
     
+   public int gold = 0;
 
-   [SerializeField] public static int points = 0;
+ public int gems = 0;
+
 
     private void Start()
     {

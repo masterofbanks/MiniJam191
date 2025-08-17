@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool inDrill; //false if looking at the map
+    public int planet;
 
     public GameObject mapCam;
     public GameObject drillCam;
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(heartIcon, new Vector3(0, 0, 0), Quaternion.identity, healthContainer.transform);
         }
-        StartCoroutine(spawnWave(100, 0.12f, 0.95f, 0.95f));
+        StartCoroutine(spawnWave(1, 1f, 0.95f, 0.95f));
 
     }
 

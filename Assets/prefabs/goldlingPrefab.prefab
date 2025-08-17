@@ -101,11 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2954c7b924e6a144994577f0eedc7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
   damageAmount: 1
-  slapSpeed: 2
+  slapSpeed: 0.3
+  enemyType: 0
   slapping: 0
-  inRange: 1
+  inRange: 0
+  gameManagerScript: {fileID: 0}
+  player: {fileID: 0}
   enemyHealth: 5
 --- !u!195 &8823358096272483373
 NavMeshAgent:
@@ -117,7 +119,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
