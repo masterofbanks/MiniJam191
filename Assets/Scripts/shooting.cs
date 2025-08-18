@@ -12,6 +12,7 @@ public class shooting : MonoBehaviour
     public GameObject bullet;
     public Transform bulletTransform; //where the bullet spawns
     public bool canFire;
+    
     private float timer;
 
 
@@ -26,6 +27,8 @@ public class shooting : MonoBehaviour
     public float gunBulletRange;
     public float gunVelocity;
     public float maxDamage;
+    public GameObject shotSFX;
+    public bool differentFireType;
     /*public void updategunStats(float fireRate,float bulletSpeed, float Range, float AD, float accu, bool isSemi)
     {
         timeBetweenFiring = fireRate;
@@ -92,6 +95,9 @@ public class shooting : MonoBehaviour
         {
             Vector3 bulletTrans = bulletTransform.position;
             GameObject bulletObj = Instantiate(bullet, bulletTrans, rot);
+            if(!differentFireType)
+                Instantiate(shotSFX, bulletTrans, Quaternion.identity);
+            
 
             // Copy the current gun stats into THIS bullet instance
             bulletObj.GetComponent<BulletScript>().updateBulletStats(
@@ -106,6 +112,11 @@ public class shooting : MonoBehaviour
             bulletObj.GetComponent<BulletScript>().direction = aimDirection;
 
             yield return new WaitForSeconds(burstSpeed);
+        }
+
+        if (differentFireType)
+        {
+            Instantiate(shotSFX, transform.position, transform.rotation);
         }
     }
 

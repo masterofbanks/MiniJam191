@@ -62,6 +62,7 @@ MonoBehaviour:
   gunBulletRange: 15
   gunVelocity: 15
   maxDamage: 15
+  shotSFX: {fileID: 7182665497176906243, guid: 3ac7a04fb48a8834fa24ee958f2d6e56, type: 3}
 --- !u!60 &1824026363574659324
 PolygonCollider2D:
   m_ObjectHideFlags: 0

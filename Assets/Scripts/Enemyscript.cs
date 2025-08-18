@@ -71,17 +71,14 @@ public class Enemyscript : MonoBehaviour
     void Update()
     {
         if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead){
-            Vector3 targetPosition = player.transform.position;
-
-            transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
-
-            agent.SetDestination(targetPosition);
 
             if(inRange&& !slapping)
             {
                 Vector3 targetPosition = player.transform.position;
 
+                transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
 
+                agent.SetDestination(targetPosition);
 
                 agent.SetDestination(targetPosition);
 
