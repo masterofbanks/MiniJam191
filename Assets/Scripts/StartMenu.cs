@@ -7,6 +7,6 @@ public class StartMenu : MonoBehaviour
     public void StartGame()
     {
         // Load the main game scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }

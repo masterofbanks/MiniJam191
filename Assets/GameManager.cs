@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     
