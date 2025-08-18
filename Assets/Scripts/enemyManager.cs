@@ -9,7 +9,10 @@ public class enemyManager : MonoBehaviour
     public float timeBetweenEnemySpawns;
     public GameObject enemy;
     public bool occupied;
-    
+    public DrillMovement drillMovementScript;
+    public float healthScaler = 2f; // Scales the enemy health based on the drill area  
+
+
     // Update is called once per frame
     public void OnTriggerStay2D(Collider2D collision)
     {
@@ -23,12 +26,9 @@ public class enemyManager : MonoBehaviour
     }
     private void Start()
     {
-
+        drillMovementScript = GameObject.FindGameObjectWithTag("drill").GetComponent<DrillMovement>();
     }
-    private void Update()
-    {
-       
-    }
+    
 
     public bool trySpawnEnemy(GameObject enemy)
     {
@@ -36,7 +36,8 @@ public class enemyManager : MonoBehaviour
         if (!occupied)
         {
 
-            Object.Instantiate(enemy, spawnTrans);
+            enemy = Object.Instantiate(enemy, spawnTrans);
+            enemy.GetComponent<Enemyscript>().enemyHealth += healthScaler * drillMovementScript.numArea;
             return true;
         }
 

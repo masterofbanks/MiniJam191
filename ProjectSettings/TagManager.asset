@@ -22,6 +22,7 @@ TagManager:
   - onSpawners
   - particleSpawner
   - upgradePortal
+  - drill
   layers:
   - Default
   - TransparentFX

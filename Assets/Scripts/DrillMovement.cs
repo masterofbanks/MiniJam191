@@ -26,6 +26,7 @@ public class DrillMovement : MonoBehaviour
     public GameObject newAreaText;
     public GameObject hitSomethingText;
     public float blinkDuration = 0.5f;
+    public int numArea = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -210,6 +211,7 @@ public class DrillMovement : MonoBehaviour
 
     public void ResetPosition()
     {
+        numArea++;
         int randAmount = UnityEngine.Random.Range(depositWaveAmount - (int)Mathf.Floor(depositWaveAmount / 2), depositWaveAmount + (int)Mathf.Floor(depositWaveAmount / 2));
         depositWaveAmount = randAmount;
         float randRarity = UnityEngine.Random.Range(0.8f, 0.999f);

@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
     public float rateOfSpawn = 0.55f; //how many enemies per second
     public float startTimeBetweenWaves;
     public float endTimeBetweenWaves;
-
     public float waveTimeScaler; //make this bigger to make timeBetweenWaves decrease slower
     public float waveAmountScaler; //make this bigger to make waveAmount increase slower
+    
 
     private float localTimeBetweenWave = 0f;
     private float timeBetweenWaves;

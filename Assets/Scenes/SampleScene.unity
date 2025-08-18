@@ -20201,6 +20201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drill
       objectReference: {fileID: 0}
+    - target: {fileID: 1184898434497395395, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
+      propertyPath: m_TagString
+      value: drill
+      objectReference: {fileID: 0}
     - target: {fileID: 2797816339144099736, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.52
@@ -20259,7 +20263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: drillSpeed
-      value: 0.075
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: mineButton
