@@ -70,51 +70,45 @@ public class Enemyscript : MonoBehaviour
     }
     void Update()
     {
-        if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead){
+        if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead)
+        {
+            Vector3 targetPosition = player.transform.position;
 
-            if(inRange&& !slapping)
+            transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
+
+            agent.SetDestination(targetPosition);
+
+            if (inRange && !slapping)
             {
-                Vector3 targetPosition = player.transform.position;
+                StartCoroutine(slapDelay(crack));
+                slapping = true;
+            }
 
-                transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
 
-                agent.SetDestination(targetPosition);
-
-                agent.SetDestination(targetPosition);
-
-                if (inRange && !slapping)
+            if (enemyHealth <= 0)
+            {
+                switch (enemyType)
                 {
-                    StartCoroutine(slapDelay(crack));
-                    slapping = true;
-                }
+                    case -1:
+                        player.GetComponent<playerStats>().gold += 20;
+                        break;
 
+                    case 0:
+                        player.GetComponent<playerStats>().gold += 60;
+                        break;
+                    case 1:
+                        player.GetComponent<playerStats>().gems += gemAmount;
+                        break;
 
-                if (enemyHealth <= 0)
-                {
-                    switch (enemyType)
-                    {
-                        case -1:
-                            player.GetComponent<playerStats>().gold += 20;
-                            break;
-
-                        case 0:
-                            player.GetComponent<playerStats>().gold += 60;
-                            break;
-                        case 1:
-                            player.GetComponent<playerStats>().gems += gemAmount;
-                            break;
-
-
-                    }
-                    player.GetComponent<playerStats>().enemyKillCount++;
-
-                    player.GetComponent<playerStats>().gold += 60;
-                    Destroy(gameObject);
 
                 }
+                player.GetComponent<playerStats>().enemyKillCount++;
+
+                player.GetComponent<playerStats>().gold += 60;
+                Destroy(gameObject);
+
             }
         }
-        
     }
 
    

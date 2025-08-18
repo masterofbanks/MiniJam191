@@ -238,6 +238,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1303749593}
     m_Modifications:
+    - target: {fileID: 1848593837575512560, guid: c8cabca6e1b0b3a4cba07ccb69aa994a, type: 3}
+      propertyPath: differentFireType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3842038025025160759, guid: c8cabca6e1b0b3a4cba07ccb69aa994a, type: 3}
       propertyPath: m_Name
       value: 8laser
