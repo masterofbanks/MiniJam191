@@ -69,41 +69,44 @@ public class Enemyscript : MonoBehaviour
     }
     void Update()
     {
-        Vector3 targetPosition = player.transform.position;
-        
-       
-
-        agent.SetDestination(targetPosition);
-
-        if(inRange&& !slapping)
+        if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead)
         {
-            StartCoroutine(slapDelay(crack));
-            slapping = true;
-        }
+            Vector3 targetPosition = player.transform.position;
 
 
-        if (enemyHealth <= 0)
-        {
-            switch (enemyType)
+
+            agent.SetDestination(targetPosition);
+
+            if (inRange && !slapping)
             {
-                case -1:
-                    player.GetComponent<playerStats>().gold += 20;
-                    break;
-
-                case 0:
-                    player.GetComponent<playerStats>().gold += 60;
-                    break;
-                case 1:
-                    player.GetComponent<playerStats>().gems += gemAmount;
-                    break;
-
-                   
+                StartCoroutine(slapDelay(crack));
+                slapping = true;
             }
-            player.GetComponent<playerStats>().enemyKillCount++;
-           
-            player.GetComponent<playerStats>().gold += 60;
-            Destroy(gameObject);
-            
+
+
+            if (enemyHealth <= 0)
+            {
+                switch (enemyType)
+                {
+                    case -1:
+                        player.GetComponent<playerStats>().gold += 20;
+                        break;
+
+                    case 0:
+                        player.GetComponent<playerStats>().gold += 60;
+                        break;
+                    case 1:
+                        player.GetComponent<playerStats>().gems += gemAmount;
+                        break;
+
+
+                }
+                player.GetComponent<playerStats>().enemyKillCount++;
+
+                player.GetComponent<playerStats>().gold += 60;
+                Destroy(gameObject);
+
+            }
         }
     }
 

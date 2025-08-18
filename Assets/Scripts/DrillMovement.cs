@@ -27,6 +27,7 @@ public class DrillMovement : MonoBehaviour
     public GameObject hitSomethingText;
     public float blinkDuration = 0.5f;
     public int numArea = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,7 @@ public class DrillMovement : MonoBehaviour
     void Update()
     {
         SetCrosshairPosition();
-        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit && !gameManagerScript.inDrill && gameManagerScript.nearTerminal)
+        if (Input.GetMouseButtonDown(0) && ValidAngle(aimAngle) && !inDeposit && !gameManagerScript.inDrill && gameManagerScript.nearTerminal && !gameManagerScript.dead)
         {
             rb.velocity = aimDirection * drillSpeed;
             transform.rotation = Quaternion.Euler(0, 0, aimAngle + 90f);
@@ -212,6 +213,8 @@ public class DrillMovement : MonoBehaviour
     public void ResetPosition()
     {
         numArea++;
+        if (GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp <= GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP - 2)
+            GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp += 2;
         int randAmount = UnityEngine.Random.Range(depositWaveAmount - (int)Mathf.Floor(depositWaveAmount / 2), depositWaveAmount + (int)Mathf.Floor(depositWaveAmount / 2));
         depositWaveAmount = randAmount;
         float randRarity = UnityEngine.Random.Range(0.8f, 0.999f);

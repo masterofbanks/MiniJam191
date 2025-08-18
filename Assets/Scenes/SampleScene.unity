@@ -16520,6 +16520,8 @@ MonoBehaviour:
   goldText: {fileID: 363274985}
   gemText: {fileID: 610809126}
   drillMovementScript: {fileID: 1997695618}
+  explosion: {fileID: 8566762438608205872, guid: de0dc56abfbc840429ad742130e7d69f, type: 3}
+  dead: 0
   startingWaveAmount: 3
   finishingWaveAmount: 8
   waveAmount: 2
@@ -17141,9 +17143,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2244992497432306080, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.33
+      propertyPath: m_LocalPosition.x
+      value: -0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 2244992497432306080, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530312578412813524, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3326581475005785478, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.39
@@ -17188,6 +17198,10 @@ PrefabInstance:
       propertyPath: tooltip
       value: 
       objectReference: {fileID: 802952783}
+    - target: {fileID: 8502197699164736285, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8502197699164736285, guid: 95c6e273bed745144b7de0b23ac477e1, type: 3}
       propertyPath: m_Name
       value: playerCharacter
@@ -20085,7 +20099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16.9, y: -24.3}
+  m_AnchoredPosition: {x: -16.900024, y: -24.299988}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1996063073

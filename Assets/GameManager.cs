@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI gemText;
     public DrillMovement drillMovementScript;
+    public GameObject explosion;
+    public bool dead;
 
     [Header("Wave Settings")]
     public int startingWaveAmount;
@@ -61,29 +63,33 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (drillMovementScript.firstDirectionSet)
+        if (!dead)
         {
-            t += Time.deltaTime;
-            UpdateTimeBetweenWaves(t);
-            UpdateWaveAmount(t);
-            localTimeBetweenWave += Time.deltaTime;
-        }
-        int currentKillCount = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount;
-        if (localTimeBetweenWave >= timeBetweenWaves && currentKillCount >= waveAmount)
-        {
-            localTimeBetweenWave = 0f;
-            StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.95f));
-        }
+            if (drillMovementScript.firstDirectionSet)
+            {
+                t += Time.deltaTime;
+                UpdateTimeBetweenWaves(t);
+                UpdateWaveAmount(t);
+                localTimeBetweenWave += Time.deltaTime;
+            }
+            int currentKillCount = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().enemyKillCount;
+            if (localTimeBetweenWave >= timeBetweenWaves && currentKillCount >= waveAmount)
+            {
+                localTimeBetweenWave = 0f;
+                StartCoroutine(spawnWave(waveAmount, rateOfSpawn, 0.95f, 0.95f));
+            }
 
-        if (Input.GetMouseButtonDown(1) && nearTerminal)
-        {
-            FlipCams();
-            
-            GameObject.FindWithTag("playerCharacter").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
-      
+            if (Input.GetMouseButtonDown(1) && nearTerminal)
+            {
+                FlipCams();
 
-        UpdateHealth();
+                GameObject.FindWithTag("playerCharacter").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+
+
+            UpdateHealth();
+            UpdateHealth();
+        }
 
     }
 
@@ -122,9 +128,14 @@ public class GameManager : MonoBehaviour
     {
         int numHearts = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP;
         int currentHealth = GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp;
-        if(currentHealth >= 0)
+
+        for(int i = 0; i < numHearts; i++)
         {
-            for (int i = numHearts - 1; i >= currentHealth; i--)
+            if(i < currentHealth)
+            {
+                healthContainer.transform.GetChild(i).GetComponent<Animator>().SetBool("empty", false);
+            }
+            else
             {
                 healthContainer.transform.GetChild(i).GetComponent<Animator>().SetBool("empty", true);
             }
@@ -134,7 +145,19 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-       //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        dead = true;
+        StartCoroutine(gameOverSequence());
+    }
+
+    IEnumerator gameOverSequence()
+    {
+        GameObject player = GameObject.FindWithTag("playerCharacter");
+        Vector3 explosionPos = player.transform.position;
+        Destroy(player);
+        Instantiate(explosion, explosionPos, Quaternion.identity);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(1);
+
     }
 
 

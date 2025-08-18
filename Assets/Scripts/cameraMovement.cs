@@ -20,14 +20,17 @@ public class cameraMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector3 offset = mousePos - playerTrans.position;
-        if (offset.magnitude > camPushMax)
+        if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead)
         {
-            offset = offset.normalized * camPushMax;
+            mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+
+            Vector3 offset = mousePos - playerTrans.position;
+            if (offset.magnitude > camPushMax)
+            {
+                offset = offset.normalized * camPushMax;
+            }
+            transform.position = new Vector3(playerTrans.position.x + offset.x, playerTrans.position.y + offset.y, -10f);
         }
-        transform.position = new Vector3(playerTrans.position.x + offset.x, playerTrans.position.y + offset.y, -10f);
     }
 
     void Update()
