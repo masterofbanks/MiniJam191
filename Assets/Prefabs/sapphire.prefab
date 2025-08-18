@@ -104,7 +104,7 @@ MonoBehaviour:
   damageAmount: 2
   slapSpeed: 0.7
   enemyType: 1
-  gemAmount: 60
+  gemAmount: 90
   slapping: 0
   inRange: 0
   gameManagerScript: {fileID: 0}
