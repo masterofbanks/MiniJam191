@@ -145,20 +145,10 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
-        dead = true;
-        StartCoroutine(gameOverSequence());
-    }
-
-    IEnumerator gameOverSequence()
-    {
-        GameObject player = GameObject.FindWithTag("playerCharacter");
-        Vector3 explosionPos = player.transform.position;
-        Destroy(player);
-        Instantiate(explosion, explosionPos, Quaternion.identity);
-        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(1);
-
     }
+
+    
 
 
 

@@ -52879,7 +52879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: drillSpeed
-      value: 0.075
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7057849955197521000, guid: 68beea3a81565ea4b93bd088340e54d2, type: 3}
       propertyPath: mineButton

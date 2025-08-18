@@ -213,7 +213,7 @@ public class DrillMovement : MonoBehaviour
     public void ResetPosition()
     {
         numArea++;
-        if (GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp <= GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP - 2)
+        if (!gameManagerScript.dead && GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp <= GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().totalHP - 2)
             GameObject.FindWithTag("playerCharacter").GetComponent<playerStats>().hp += 2;
         int randAmount = UnityEngine.Random.Range(depositWaveAmount - (int)Mathf.Floor(depositWaveAmount / 2), depositWaveAmount + (int)Mathf.Floor(depositWaveAmount / 2));
         depositWaveAmount = randAmount;
