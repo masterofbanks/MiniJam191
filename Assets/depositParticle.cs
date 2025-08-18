@@ -5,9 +5,9 @@ using UnityEngine;
 public class depositParticle : MonoBehaviour
 {
     public Vector3 direction;
-    public float speed = 2f;
+    public float speed = 4f;
     public float scaleSpeed = 0.5f;
-    public float lifeTime = 8f;
+    public float lifeTime = 12f;
     public float timer = 0f;
 
     void Update()

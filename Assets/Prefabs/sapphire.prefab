@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 470095927
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 1340551529, guid: 6f8ea2f7a04879949aa199266747ca05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 2
   slapSpeed: 0.7
+  spinSpeed: 0
   enemyType: 1
   gemAmount: 90
   slapping: 0
