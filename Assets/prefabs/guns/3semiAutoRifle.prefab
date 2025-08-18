@@ -56,8 +56,8 @@ MonoBehaviour:
   Semi: 1
   burstAmount: 1
   burstspeed: 0
-  timeBetweenFiring: 1.5
-  gunDamage: 10
+  timeBetweenFiring: 1.25
+  gunDamage: 15
   gunAccuracy: 0.95
   gunBulletRange: 20
   gunVelocity: 15
