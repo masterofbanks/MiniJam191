@@ -176,7 +176,7 @@ MonoBehaviour:
   gunAccuracy: 0.8
   gunBulletRange: 10
   gunVelocity: 15
-  maxDamage: 0
+  maxDamage: 18
 --- !u!60 &-6695130020599951656
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class Enemyscript : MonoBehaviour
 
     public int damageAmount = 1;
     public float slapSpeed;
+    public float spinSpeed;
     public int enemyType;
     public int gemAmount;
     public bool slapping =false;
@@ -46,7 +47,7 @@ public class Enemyscript : MonoBehaviour
         agent.updateUpAxis = false;
         
         
-
+         spinSpeed = Random.Range(-180f, 180f);
         
         
     }
@@ -70,8 +71,8 @@ public class Enemyscript : MonoBehaviour
     void Update()
     {
         Vector3 targetPosition = player.transform.position;
-        
-       
+
+        transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
 
         agent.SetDestination(targetPosition);
 
