@@ -172,11 +172,11 @@ MonoBehaviour:
   burstAmount: 1
   burstspeed: 0
   timeBetweenFiring: 0.4
-  gunDamage: 5
-  gunAccuracy: 0.7
+  gunDamage: 6
+  gunAccuracy: 0.8
   gunBulletRange: 10
-  gunVelocity: 8
-  maxDamage: 0
+  gunVelocity: 15
+  maxDamage: 18
 --- !u!60 &-6695130020599951656
 PolygonCollider2D:
   m_ObjectHideFlags: 0

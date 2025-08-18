@@ -169,14 +169,14 @@ MonoBehaviour:
   canFire: 1
   piercing: 0
   Semi: 0
-  burstAmount: 40
+  burstAmount: 50
   burstspeed: 0
   timeBetweenFiring: 1
-  gunDamage: 2
+  gunDamage: 10
   gunAccuracy: 0.2
   gunBulletRange: 20
-  gunVelocity: 7
-  maxDamage: 0
+  gunVelocity: 5
+  maxDamage: 100
 --- !u!60 &-3302408636691179782
 PolygonCollider2D:
   m_ObjectHideFlags: 0

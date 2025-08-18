@@ -13,6 +13,7 @@ public class Enemyscript : MonoBehaviour
 
     public int damageAmount = 1;
     public float slapSpeed;
+    public float spinSpeed;
     public int enemyType;
     public int gemAmount;
     public bool slapping =false;
@@ -46,7 +47,7 @@ public class Enemyscript : MonoBehaviour
         agent.updateUpAxis = false;
         
         
-
+         spinSpeed = Random.Range(-180f, 180f);
         
         
     }
@@ -69,45 +70,54 @@ public class Enemyscript : MonoBehaviour
     }
     void Update()
     {
-        if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead)
-        {
+        if (!GameObject.FindWithTag("GameController").GetComponent<GameManager>().dead){
             Vector3 targetPosition = player.transform.position;
 
-
+            transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
 
             agent.SetDestination(targetPosition);
 
-            if (inRange && !slapping)
+            if(inRange&& !slapping)
             {
-                StartCoroutine(slapDelay(crack));
-                slapping = true;
-            }
+                Vector3 targetPosition = player.transform.position;
 
 
-            if (enemyHealth <= 0)
-            {
-                switch (enemyType)
+
+                agent.SetDestination(targetPosition);
+
+                if (inRange && !slapping)
                 {
-                    case -1:
-                        player.GetComponent<playerStats>().gold += 20;
-                        break;
+                    StartCoroutine(slapDelay(crack));
+                    slapping = true;
+                }
 
-                    case 0:
-                        player.GetComponent<playerStats>().gold += 60;
-                        break;
-                    case 1:
-                        player.GetComponent<playerStats>().gems += gemAmount;
-                        break;
 
+                if (enemyHealth <= 0)
+                {
+                    switch (enemyType)
+                    {
+                        case -1:
+                            player.GetComponent<playerStats>().gold += 20;
+                            break;
+
+                        case 0:
+                            player.GetComponent<playerStats>().gold += 60;
+                            break;
+                        case 1:
+                            player.GetComponent<playerStats>().gems += gemAmount;
+                            break;
+
+
+                    }
+                    player.GetComponent<playerStats>().enemyKillCount++;
+
+                    player.GetComponent<playerStats>().gold += 60;
+                    Destroy(gameObject);
 
                 }
-                player.GetComponent<playerStats>().enemyKillCount++;
-
-                player.GetComponent<playerStats>().gold += 60;
-                Destroy(gameObject);
-
             }
         }
+        
     }
 
    

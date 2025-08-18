@@ -56,12 +56,12 @@ MonoBehaviour:
   Semi: 1
   burstAmount: 1
   burstspeed: 0
-  timeBetweenFiring: 1.5
-  gunDamage: 10
-  gunAccuracy: 0.95
+  timeBetweenFiring: 1.25
+  gunDamage: 15
+  gunAccuracy: 0.97
   gunBulletRange: 20
-  gunVelocity: 15
-  maxDamage: 0
+  gunVelocity: 25
+  maxDamage: 75
 --- !u!60 &400325498200186446
 PolygonCollider2D:
   m_ObjectHideFlags: 0
